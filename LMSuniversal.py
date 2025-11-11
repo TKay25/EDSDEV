@@ -1,5 +1,9 @@
 import uuid
 import os
+
+# Prevent Matplotlib from building font cache on startup (blocks Gunicorn port binding on Render)
+os.environ.setdefault("MPLCONFIGDIR", "/tmp/.matplotlib")
+
 from db_helper import get_db, execute_query
 import numpy as np
 from mysql.connector import Error
