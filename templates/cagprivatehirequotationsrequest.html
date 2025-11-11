@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CAG TOURS PRIVATE HIRE QUOTATION REQUESTS HISTORY</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+            @top-center {
+                content: element(pageHeader);
+            }
+            @bottom-center {
+                content: element(pageFooter);
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 11px;
+            color: #2d3748;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        #pageHeader {
+            position: running(pageHeader);
+            width: 100%;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 10pt;
+            color: #4a5568;
+        }
+
+        #pageFooter {
+            position: running(pageFooter);
+            width: 100%;
+            text-align: center;
+            padding-top: 5px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 10pt;
+            color: #718096;
+        }
+
+        .document-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 5px;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #003366;
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .print-container {
+            width: 100%;
+            max-width: 180mm; /* A4 width is 210mm - some margin */
+            margin: 0 auto;
+        }
+
+        table.data {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 51, 102, 0.08);
+            table-layout: fixed;   /* ensures cells don't expand unpredictably */
+            word-wrap: break-word; /* prevents overflow inside cells */
+            margin: 0 auto;        /* keeps it centered within page margins */
+        }
+
+        .data th, .data td {
+            border: 1px solid #e2e8f0;
+            padding: 3px 4px;
+            font-size: 8px;
+            word-wrap: break-word;
+        }
+
+        .data th {
+            background-color: #f7fafc;
+            color: #4a5568;
+            font-weight: 600;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data tr {
+            background-color: #fff;
+        }
+
+        .status-Approved {
+            background-color: #d4edda !important;
+        }
+
+        .status-Declined {
+            background-color: #f8d7da !important;
+        }
+
+        .status-Pending {
+            background-color: #fff3cd !important;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 10px;
+            color: #718096;
+            text-align: center;
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 50%;
+            right: 50%;
+            transform: translate(50%, 50%) rotate(-30deg);
+            opacity: 0.1;
+            font-size: 120px;
+            font-weight: bold;
+            color: #003366;
+            pointer-events: none;
+            z-index: 8;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="pageHeader">
+        CAG TOURS PRIVATE HIRE QUOTATION REQUESTS
+    </div>
+
+    <div class="document-container">
+        <h2>Private Hire Quotation Requests as at {{ app.generated_on }} </h2>
+
+        <div class="table-container">
+            {{ table_hist_html | safe }}
+        </div>
+
+        <div class="watermark">PRIVATE HIRE</div>
+    </div>
+
+    <div class="footer">
+        <p>This is an official document of CAG Tours. Unauthorised edits and/or use is prohibited.</p>
+    </div>
+
+    <div id="pageFooter">
+        Page <span class="pageNumber"></span> | Generated on {{ app.generated_on }} <br> Powered by Alluire Marketing
+    </div>
+</body>
+</html>

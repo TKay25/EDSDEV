@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management System</title>
+    <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/eds blue.png') }}"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #003366;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+        }
+
+        p {
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(-90deg, #1A1A2E 40%, #1A1A2E 100%);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1573164574511-73c773193279?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
+            background-size: cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-section a {
+            margin: 10px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .hero-section a.btn-primary {
+            background-color: #002f6c;
+            border: 1px solid #ddd;
+        }
+
+        .hero-section a.btn-primary:hover {
+            background-color: #4169E1;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section a.btn-outline-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 60px 0;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .features-section h2 {
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .features-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #002f6c;
+        }
+
+        .btn-primary9 {
+            color: white;
+            background-color: #003366;
+            width: 35%;
+            margin: 8px 0;
+            padding: 5px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            border: 3px solid #003366;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .btn-primary9:hover {
+            background-color: white;
+            color: #003366;
+            border: 3px solid #003366;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .feature-card {
+            padding: 30px 20px;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            margin-bottom: 20px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #002f6c;
+            margin-bottom: 20px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: #f0f0f0;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .testimonials h2 {
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .testimonials h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #002f6c;
+        }
+
+        .testimonial {
+            margin: 20px 0;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: #002f6c;
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+            padding-left: 40px;
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+            color: #002f6c;
+            margin-top: 20px;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .pricing-section h2 {
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .pricing-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #002f6c;
+        }
+
+        .pricing-card {
+            border: none;
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card h3 {
+            margin-bottom: 20px;
+            color: #002f6c;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #002f6c;
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid #002f6c;
+            position: relative;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: #002f6c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Call-to-Action Section */
+        .cta {
+            background-color: #002f6c;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta a {
+            color: #002f6c;
+            background-color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .cta a:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #010752;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer a {
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-heading {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+            z-index: 1;
+        }
+
+        /* Form Styles */
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .modal-header {
+            background-color: #003366;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0 !important;
+        }
+
+        .modal-header .btn-close {
+            background-color: white;
+            color: black;
+            opacity: 1;
+        }
+
+        .modal-header .btn-close:hover {
+            background-color: #f8f9fa;
+            color: #000;
+            opacity: 1;
+        }
+
+        .modal-footer {
+            gap: 10px;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            font-size: 18px;
+            z-index: 9999;
+        }
+
+        /* Fancy spinner */
+        .loading-spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #003366;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Animation for spinning */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background-color: #002f6c;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        /* Demo Section */
+        .demo-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+
+        .demo-video {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Owl Carousel Customizations */
+        .owl-carousel .owl-item img {
+            width: auto;
+            max-width: 100px;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+
+        .owl-theme .owl-dots .owl-dot span {
+            width: 12px;
+            height: 12px;
+            margin: 5px 7px;
+            background: #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .owl-theme .owl-dots .owl-dot.active span, 
+        .owl-theme .owl-dots .owl-dot:hover span {
+            background: #002f6c;
+            transform: scale(1.2);
+        }
+
+        .owl-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .owl-prev, .owl-next {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 47, 108, 0.7) !important;
+            color: white !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem !important;
+            transition: all 0.3s ease;
+        }
+
+        .owl-prev:hover, .owl-next:hover {
+            background-color: rgba(0, 47, 108, 1) !important;
+            transform: scale(1.1);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .step {
+            position: relative;
+            padding: 30px;
+            margin-bottom: 30px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 50px;
+            height: 50px;
+            background-color: #002f6c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section p {
+                font-size: 1rem;
+            }
+            
+            .btn-primary9 {
+                width: 80%;
+            }
+            
+            .logo {
+                width: 150px;
+                top: 10px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        .eds-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            font-family: 'Century Gothic', sans-serif;  
+        }
+        
+        .eds-logo {
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px #003366;
+        }
+        
+        .eds-tagline {
+            color: #fff;
+            font-size: 0.6rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        
+        .loader-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .loader-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, White, #003366);
+            animation: load 3s ease-in-out infinite;
+            border-radius: 2px;
+        }
+        
+        @keyframes load {
+            0% { width: 0%; left: 0; }
+            50% { width: 100%; left: 0; }
+            100% { width: 0%; left: 100%; }
+        }
+        
+        .eds-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 20px);
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .grid-item {
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 255, 252, 0.2);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        .grid-item:nth-child(1) { animation-delay: 0s; }
+        .grid-item:nth-child(2) { animation-delay: 0.2s; }
+        .grid-item:nth-child(3) { animation-delay: 0.4s; }
+        .grid-item:nth-child(4) { animation-delay: 0.6s; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.2); opacity: 1; background: #336699; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Overlays -->
+
+    <div class="eds-loader" id="edsLoader" style="display: none;">
+        <!-- <div class="eds-logo"><img src="{{ url_for('static', filename='images/EDS LOGO.png') }}"  alt="Logo" class="logo" style="width: 200px;"></div> -->
+        <br><br>
+        <p style="font-weight: 700;color: white;font-size: 1.2rem;">Attempting to Log You In, Please Wait...</p>
+
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+        
+        <div class="eds-grid">
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+        </div>
+    </div>
+
+    <div class="eds-loader" id="edsLoader2" style="display: none;">
+        <!-- <div class="eds-logo"><img src="{{ url_for('static', filename='images/EDS LOGO.png') }}"  alt="Logo" class="logo" style="width: 170px;"></div> -->
+        <br><br>
+        <p style="font-weight: 700;color: white;font-size: 1.2rem;">Attempting to Create an LMS Profile or Your Company, Please Wait...</p>
+
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+        
+        <div class="eds-grid">
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <!-- <img src="{{ url_for('static', filename='images/EDS LOGO.png') }}" alt="Logo" class="logo"> -->
+
+        <div class="container hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Effortless Leave Management</h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">Simplify your team's leave process with our intuitive tools and real-time tracking.</p>
+            <div class="animate__animated animate__fadeInUp animate__delay-2s">
+                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">Administrator Company Setup</a>
+                <a href="#" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#logindModal">Login</a>
+                <!-- <a class="btn btn-outline-light"  href="{{ url_for('landingpage') }}" >Explore Other Solutions</a> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="500">24</div>
+                        <div class="stat-label">Companies</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="25000">200</div>
+                        <div class="stat-label">Employees</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="98">100</div>
+                        <div class="stat-label">% Satisfaction</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="24">24</div>
+                        <div class="stat-label">/7 Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2>Why Choose Our LMS?</h2>
+            <p class="mb-5">Streamline your leave management process with our powerful features</p>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <h5>Quick Approvals</h5>
+                        <p>Managers can approve or deny leave requests instantly from any device, with automated notifications.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h5>Real-Time Tracking</h5>
+                        <p>Stay updated on leave balances and schedules with our intuitive dashboard and calendar view.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-file-earmark-bar-graph"></i>
+                        </div>
+                        <h5>Detailed Reporting</h5>
+                        <p>Generate custom reports to analyze leave trends and make better scheduling decisions.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <h5>Mobile Friendly</h5>
+                        <p>Access the system from anywhere with our fully responsive design and mobile app.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="text-center mb-5">How It Works</h2>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Sign Up</h4>
+                        <p>Register your company and set up your leave policies in minutes with our intuitive setup wizard.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Invite Team</h4>
+                        <p>Add your employees and managers to the system with bulk import or individual invitations.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Start Managing</h4>
+                        <p>Employees can request leave, managers approve, and HR tracks everything in real-time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2>See It In Action</h2>
+                    <p>Watch our quick demo to see how easy it is to manage your team's leave with our system.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Simple interface for employees</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Powerful tools for managers</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Comprehensive reporting for HR</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary9 mt-3" data-bs-toggle="modal" data-bs-target="#signupModal">Setup Your Company</a>
+                </div>
+                <!-- <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="demo-video ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen></iframe>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section 
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="text-center mb-5">What Our Users Say</h2>
+            
+            <div class="owl-carousel owl-theme">
+                <div class="item">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"This is the best leave management software we've ever used! It has saved us countless hours of administrative work and eliminated all the paper forms we used to deal with."</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alex" class="rounded-circle me-2" width="50">
+                                <div>
+                                    <strong>Alex Johnson</strong><br>
+                                    <small>HR Manager, TechSolutions Inc.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"Simplifies scheduling and tracking leaves for the entire team. The mobile app is particularly useful for our field staff who are always on the go."</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Maria" class="rounded-circle me-2" width="50">
+                                <div>
+                                    <strong>Maria Rodriguez</strong><br>
+                                    <small>Operations Manager, FieldForce</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"The reporting features have given us insights into leave patterns we never had before. We've been able to optimize our staffing based on historical data."</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David" class="rounded-circle me-2" width="50">
+                                <div>
+                                    <strong>David Chen</strong><br>
+                                    <small>Director of HR, Global Corp</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"As an employee, I love how easy it is to request time off and see my remaining balance. No more guessing or waiting for HR to respond to emails."</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sarah" class="rounded-circle me-2" width="50">
+                                <div>
+                                    <strong>Sarah Williams</strong><br>
+                                    <small>Marketing Specialist</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Pricing Section 
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Choose Your Plan</h2>
+            <p class="text-center mb-5">Simple, transparent pricing that scales with your business</p>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <h3>Basic</h3>
+                        <p>Perfect for small teams</p>
+                        <div class="price">$0<span>/month</span></div>
+                        <ul class="pricing-features">
+                            <li>Up to 10 employees</li>
+                            <li>Basic leave tracking</li>
+                            <li>Email support</li>
+                            <li>Standard reports</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary9" data-bs-toggle="modal" data-bs-target="#signupModal">Get Started</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Professional</h3>
+                        <p>For growing businesses</p>
+                        <div class="price">$49<span>/month</span></div>
+                        <ul class="pricing-features">
+                            <li>Up to 50 employees</li>
+                            <li>Advanced approval workflows</li>
+                            <li>Priority support</li>
+                            <li>Custom reports</li>
+                            <li>Mobile app access</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary9" data-bs-toggle="modal" data-bs-target="#signupModal">Setup Your Company</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <h3>Enterprise</h3>
+                        <p>For large organizations</p>
+                        <div class="price">Custom</div>
+                        <ul class="pricing-features">
+                            <li>Unlimited employees</li>
+                            <li>Advanced analytics</li>
+                            <li>24/7 dedicated support</li>
+                            <li>API access</li>
+                            <li>Single sign-on (SSO)</li>
+                            <li>Custom integrations</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary9">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Call-to-Action Section -->
+    <section class="cta">
+        <div class="container cta-content">
+            <h2>Ready to Streamline Your Leave Management?</h2>
+            <p>Join thousands of companies who have transformed their HR processes with our solution.</p>
+            <a href="#" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#signupModal">Setup Your Company</a>
+        </div>
+    </section>
+
+    <!-- Footer 
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <img src="{{ url_for('static', filename='images/EDS LOGO.png') }}" alt="Logo" class="footer-logo">
+                    <p>Simplifying leave management for businesses of all sizes since 2015.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h4 class="footer-heading">Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">API Docs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Leave Management System. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer> -->
+
+    <!-- Modals (same as in your original code) -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content" style="border-radius: 12px; box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="signupModalLabel" style="font-weight: bold;">ADMINISTRATOR COMPANY SETUP</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" style="font-size: 15px;">
+                <form method="POST" action="/admin_sign_up">
+                  <div class="form-group">
+                    <label for="company_name">Company Name</label>
+                    <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Enter Company Name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="firstname">Administrator First Name</label>
+                    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter Administrator First Name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="surname">Administrator Surname</label>
+                    <input type="text" class="form-control" name="surname" id="surname" placeholder="Enter Administrator Surname" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="whatsapp">Administrator WhatsApp Number</label>
+                    <input type="number" class="form-control" name="whatsapp" id="whatsapp" placeholder="Enter WhatsApp Number (without first zero)" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Administrator Email Address</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter Administrator Email Address" autocomplete="email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password" required>
+                        <button type="button" id="togglePasswordsignup" style="background-color: #003366; color: white; border: none;width: 15%;">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="confirmpassword">Confirm Password</label>
+                    <input type="confirmpassword" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Re-Enter Password" required>
+                  </div>
+                  <button id="startFreeTrial" class="btn btn-primary9 btn-block shadow">Proceed to Setup</button>
+                </form>
+      
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="modal fade" id="logindModal" tabindex="-1" aria-labelledby="logindModalLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 12px; box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel" style="font-weight: bold;"> <i class="bi bi-door-open-fill"></i>    LOGIN MENU</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+
+              <button  class="btn btn-primary9 btn-block shadow" data-bs-toggle="modal" data-bs-target="#loginModal" style="width: max-content;">Not A First Time Login<i class="bi bi-box-arrow-in-right" style="margin-left: 6px;"></i></button>
+              <br>
+              <button class="btn btn-primary9 btn-block shadow" data-bs-toggle="modal" data-bs-target="#loginoneModal" style="width: max-content;">First Time Login<i class="bi bi-box-arrow-in-right" style="margin-left: 6px;"></i></button>
+
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius: 12px; box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);">
+        <form action="/login" method="POST">
+          <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel" style="font-weight: bold;"><i class="bi bi-door-open"></i>    LOGIN</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" name="emaillogin" class="form-control" placeholder="Enter Your Email Address" required>
+            </div>
+            <div class="form-group">
+                <label for="passwordField">Password</label>
+                <div class="input-group">
+                    <input type="password" name="passwordlogin" id="passwordField" class="form-control" placeholder="Enter Your Password" required>
+                    <button type="button" id="togglePassword" style="background-color: #003366; color: white; border: none;width: 15%;">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <button type="submit" id="userlogin" class="btn btn-primary9 btn-block shadow">Login</button>
+            <div class="text-center mt-4">
+                <span>Forgot Your Password?</span>
+                <button type="button" class="btn btn-primary9 shadow mt-2">Reset Password</button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="loginoneModal" tabindex="-1" aria-labelledby="loginoneModalLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 12px; box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);">
+          <form action="/login_first_time" method="POST">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginoneModalLabel" style="font-weight: bold;"><i class="bi bi-door-open"></i> FIRST TIME LOGIN</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="emailloginfirsttime">Email Address</label>
+                    <input type="email" class="form-control" name="emailloginfirsttime" id="emailloginfirsttime" placeholder="Enter Your Email Address" autocomplete="email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="passwordloginfirsttime">Password</label>
+                    <div class="input-group">
+                        <input type="password" name="passwordloginfirsttime" id="passwordloginfirsttime" class="form-control" placeholder="Enter Your Desired Password" required>
+                        <button type="button" id="togglePasswordloginfirsttime" style="background-color: #003366; color: white; border: none;width: 15%;">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="confirmpasswordfirsttime">Confirm Password</label>
+                    <input type="password" class="form-control" name="confirmpasswordfirsttime" id="confirmpasswordfirsttime" placeholder="Re-Enter Password" required>
+                  </div>
+              </div>
+              <button type="submit" id="userloginfirstlogin" class="btn btn-primary9 btn-block shadow">Login</button>
+              <br>
+              <br>
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+
+
+    <script>
+        // Initialize Owl Carousel for testimonials
+        $(document).ready(function(){
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 20,
+                nav: true,
+                dots: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    768: {
+                        items: 2
+                    },
+                    992: {
+                        items: 3
+                    }
+                }
+            });
+            
+            // Counter animation for stats
+            $('.stat-number').each(function () {
+                $(this).prop('Counter', 0).animate({
+                    Counter: $(this).text()
+                }, {
+                    duration: 2000,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+            });
+            
+            // Password toggle functionality
+            document.getElementById('togglePassword').addEventListener('click', function () {
+                const passwordField = document.getElementById('passwordField');
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+
+                const icon = this.querySelector('i');
+                icon.classList.toggle('bi-eye');
+                icon.classList.toggle('bi-eye-slash');
+            });
+
+            document.getElementById('togglePasswordloginfirsttime').addEventListener('click', function () {
+                const passwordField = document.getElementById('passwordloginfirsttime');
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+
+                const icon = this.querySelector('i');
+                icon.classList.toggle('bi-eye');
+                icon.classList.toggle('bi-eye-slash');
+            });
+
+            document.getElementById('togglePasswordsignup').addEventListener('click', function () {
+                const passwordField = document.getElementById('password');
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+
+                const icon = this.querySelector('i');
+                icon.classList.toggle('bi-eye');
+                icon.classList.toggle('bi-eye-slash');
+            });
+
+            // Form submission handlers
+            $('#userlogin').on('click', function(e) {
+                e.preventDefault();
+                const email = $('input[name="emaillogin"]').val().trim();
+                const password = $('input[name="passwordlogin"]').val().trim();
+
+                if (!email || !password) {
+                    alert('Please enter both email and password.');
+                    return;
+                }
+
+                $('#edsLoader').show();
+                $('#userlogin').closest('form').submit();
+            });
+
+            $('#userloginfirsttime').on('click', function(e) {
+                e.preventDefault();
+                const email = $('input[name="emailloginfirsttime"]').val().trim();
+                const password = $('input[name="passwordloginfirsttime"]').val().trim();
+                const confirmpassword = $('input[name="confirmpasswordfirsttime"]').val().trim();
+
+                if (!email || !password || !confirmpassword) {
+                    alert('Please enter both email and password.');
+                    return;
+                }
+
+                $('#edsLoader').show();
+                $('#userloginfirstlogin').closest('form').submit();
+            });
+
+            $('#startFreeTrial').on('click', function(e) {
+                e.preventDefault();
+                const companyName = $('input[name="company_name"]').val().trim();
+                const firstName = $('input[name="firstname"]').val().trim();
+                const surname = $('input[name="surname"]').val().trim();
+                const whatsapp = $('input[name="whatsapp"]').val().trim();
+                const email = $('input[name="email"]').val().trim();
+                const password = $('input[name="password"]').val().trim();
+
+                if (!companyName || !firstName || !surname || !whatsapp || !email || !password) {
+                    alert('Please fill out all required fields.');
+                    return;
+                }
+
+                const validName = /^[a-zA-Z].*/;
+
+                if (!validName.test(companyName)) {
+                    alert("Invalid Company Name! Must start with a letter.");
+                    return;
+                }
+
+
+                $('#edsLoader2').show();
+                $('#signupModal').find('form').submit();
+            });
+
+            // Smooth scrolling for anchor links
+            $('a[href*="#"]').on('click', function(e) {
+                e.preventDefault();
+                
+                $('html, body').animate(
+                    {
+                        scrollTop: $($(this).attr('href')).offset().top,
+                    },
+                    500,
+                    'linear'
+                );
+            });
+        });
+    </script>
+</body>
+
+</html>

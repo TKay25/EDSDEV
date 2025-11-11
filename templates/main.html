@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echelon Digital Solutions</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/eds blue.png') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B00;
+            --dark: #1A1A2E;
+            --light: #F5F5F7;
+            --accent: #003366;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary);
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        p {
+            font-weight: 400;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .bg-primary {
+            background-color: var(--primary) !important;
+        }
+
+        .bg-secondary {
+            background-color: var(--secondary) !important;
+        }
+
+        .bg-dark {
+            background-color: var(--dark) !important;
+        }
+
+        .text-primary {
+            color: var(--primary) !important;
+        }
+
+        .text-secondary {
+            color: var(--secondary) !important;
+        }
+
+        .text-accent {
+            color: var(--accent) !important;
+        }
+
+        /* Navbar */
+        .navbar {
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: white !important;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center; /* Align items vertically */
+            gap: 10px; /* Add spacing between the logo and text */
+            text-decoration: none;
+        }
+
+        .logo {
+            height: 50px; /* Adjust logo size as needed */
+        }
+
+        .brand-text {
+            font-size: 20px; /* Adjust text size */
+            color: #003366; /* Adjust text color */
+            margin: 0;
+        }
+
+
+        .navbar-brand img {
+            height: 40px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            padding: 8px 15px !important;
+            margin: 0 5px;
+            color: var(--primary) !important;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
+        .nav-link.active {
+            color: var(--primary) !important;
+            font-weight: 600;
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .dropdown-item {
+            font-weight: 500;
+            padding: 8px 20px;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark) 100%);
+            color: white;
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 800;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+        }
+
+        .hero-btns .btn {
+            margin: 10px;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            border-radius: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #00214d;
+            border-color: #00214d;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline-light:hover {
+            background-color: #00214d;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .about-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-img {
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.5s ease;
+        }
+
+        .about-img:hover {
+            transform: scale(1.03);
+        }
+
+        .about-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-features li {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+        }
+
+        .about-features li i {
+            position: absolute;
+            left: 0;
+            top: 10px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* Services Section */
+        .services-section {
+            background-color: #f9fafc;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 60px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+        }
+
+        .service-card {
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            margin-bottom: 30px;
+            border-bottom: 4px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border-bottom-color: var(--accent);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .service-card h4 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Solutions Showcase */
+        .solutions-tabs {
+            border: none;
+        }
+
+        .solutions-tabs .nav-link {
+            border: none;
+            padding: 15px 25px !important;
+            font-weight: 600;
+            color: #777 !important;
+            background: none;
+            border-radius: 20px;
+            margin: 0 5px 15px;
+        }
+
+        .solutions-tabs .nav-link.active {
+            background-color: var(--primary);
+            color: white !important;
+        }
+
+        .solution-tab-content {
+            padding: 30px;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .solution-img {
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .solution-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .stat-item {
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background-color: #f9fafc;
+        }
+
+        .testimonial-card {
+            padding: 30px;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin: 15px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--primary);
+            opacity: 0.1;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+            padding-left: 40px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid var(--accent);
+        }
+
+        .author-info h5 {
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 0;
+        }
+
+        /* Clients Section */
+        .clients-section {
+            background-color: white;
+        }
+
+        .client-logo {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            max-height: 60px;
+            width: auto;
+            margin: 0 auto;
+        }
+
+        .client-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 0;
+        }
+
+        .footer-logo {
+            max-width: 180px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links h5 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            margin-top: 60px;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            section {
+                padding: 80px 0;
+            }
+            
+            .hero-section {
+                padding: 150px 0 80px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero-section {
+                padding: 120px 0 60px;
+                text-align: center;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-section p {
+                font-size: 1rem;
+            }
+            
+            .hero-btns .btn {
+                display: block;
+                width: 80%;
+                margin: 10px auto;
+            }
+            
+            .section-title::after {
+                bottom: -10px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            section {
+                padding: 50px 0;
+            }
+            
+            .hero-section {
+                padding: 100px 0 50px;
+            }
+            
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .navbar-brand img {
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='images/eds logo blue.png') }}" alt="Logo" class="logo">
+                <h1 class="brand-text">ECHELON DIGITAL SOLUTIONS</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Solutions
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="#solutions">All Solutions</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#leave-management">Leave Management</a></li>
+                            <li><a class="dropdown-item" href="#treasury">Treasury Systems</a></li>
+                            <li><a class="dropdown-item" href="#erm">Enterprise Risk Management</a></li>
+                            <li><a class="dropdown-item" href="#payroll">Payroll Systems</a></li>
+                            <li><a class="dropdown-item" href="#hr">HR Management</a></li>
+                            <li><a class="dropdown-item" href="#custom">Custom Solutions</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#clients">Clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="#contact">Request Demo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="animate__animated animate__fadeInDown">Transform Your Business With Smart Enterprise Solutions</h1>
+                    <p class="animate__animated animate__fadeInUp animate__delay-1s">We build powerful software solutions that streamline operations, reduce costs, and drive growth for organizations of all sizes.</p>
+                    <div class="hero-btns animate__animated animate__fadeInUp animate__delay-2s">
+                        <a href="#solutions" class="btn btn-primary">Explore Solutions</a>
+                        <a href="#contact" class="btn btn-outline-light">Contact Us</a>
+                        <a  data-bs-toggle="modal" data-bs-target="#privacypolicyModal" class="btn btn-outline-light">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img src="{{ url_for('static', filename='images/image 3.jpg') }}" alt="About Echelon Digital Solutions" class="img-fluid about-img">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">About Echelon Digital Solutions</h2>
+                    <p>Founded in 2023, Echelon Digital Solutions has been at the forefront of enterprise software development, helping organizations across industries transform their operations with cutting-edge technology solutions.</p>
+                    <p>Our team of experienced developers, analysts, and consultants work closely with clients to understand their unique challenges and deliver tailored solutions that drive real business value.</p>
+                    <ul class="about-features">
+                        <li><i class="bi bi-check-circle-fill"></i> 34+ Enterprise Clients Nationwide</li>
+                        <li><i class="bi bi-check-circle-fill"></i> ISO 27001 Certified for Information Security</li>
+                        <li><i class="bi bi-check-circle-fill"></i> 24/7 Technical Support</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Custom Development & Integration Services</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary mt-3">Learn More About Us</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="privacypolicyModal" tabindex="-1" role="dialog" aria-labelledby="privacypolicyModalLabel">
+            <div class="modal-dialog" role="document"  style="max-width: 70%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="privacypolicyModalLabel"><i class="bi bi-repeat"></i>    PRIVACY POLICY</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" style="overflow-y: auto;max-height: 600px;">
+
+                        <div class="toc">
+                            <h3>Table of Contents</h3>
+                            <ul>
+                                <li><a href="#introduction">1. Introduction</a></li>
+                                <li><a href="#information-we-collect">2. Information We Collect</a></li>
+                                <li><a href="#how-we-use">3. How We Use Your Information</a></li>
+                                <li><a href="#data-sharing">4. Data Sharing & Disclosure</a></li>
+                                <li><a href="#data-retention">5. Data Retention</a></li>
+                                <li><a href="#security">6. Security Measures</a></li>
+                                <li><a href="#your-rights">7. Your Rights</a></li>
+                                <li><a href="#updates">8. Updates to This Policy</a></li>
+                                <li><a href="#contact">9. Contact Us</a></li>
+                            </ul>
+                        </div>
+                    
+                        <div class="section" id="introduction">
+                            <h2>1. Introduction</h2>
+                            <p>Echelon Digital Solutions respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you interact with us through the WhatsApp Business API (provided by Meta).</p>
+                            <p>By using our WhatsApp Business services, you consent to the practices described in this policy.</p>
+                        </div>
+                    
+                        <div class="section" id="information-we-collect">
+                            <h2>2. Information We Collect</h2>
+                            
+                            <div class="subsection">
+                                <h3>2.1. Information You Provide</h3>
+                                <p>We may collect the following personal data when you communicate with us via WhatsApp:</p>
+                                <ul>
+                                    <li><strong>Contact Information:</strong> Phone number, name, email address (if provided).</li>
+                                    <li><strong>Message Content:</strong> Text, images, videos, documents, or other files shared in conversations.</li>
+                                    <li><strong>Transaction Details:</strong> Order confirmations, payment details (if applicable).</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="subsection">
+                                <h3>2.2. Information Automatically Collected</h3>
+                                <ul>
+                                    <li><strong>Metadata:</strong> Timestamps, message status (delivered, read), and interaction logs.</li>
+                                    <li><strong>Device Information:</strong> IP address, device type, operating system (collected via WhatsApp's API).</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="subsection">
+                                <h3>2.3. Information from Third Parties</h3>
+                                <p>If you interact with us through a linked Facebook/Instagram Business account, we may receive limited profile data (e.g., public name) as permitted by Meta's policies.</p>
+                            </div>
+                        </div>
+                    
+                        <div class="section" id="how-we-use">
+                            <h2>3. How We Use Your Information</h2>
+                            <p>We use your data to:</p>
+                            <ul>
+                                <li>Provide customer support and respond to inquiries.</li>
+                                <li>Process orders, bookings, or service requests.</li>
+                                <li>Send transactional updates (e.g., shipping confirmations).</li>
+                                <li>Improve our services and personalize user experiences.</li>
+                                <li>Comply with legal obligations and prevent fraud.</li>
+                            </ul>
+                            <p>We do not use WhatsApp for telemedicine or to collect sensitive health/financial data unless explicitly consented and legally permitted.</p>
+                        </div>
+                    
+                        <div class="section" id="data-sharing">
+                            <h2>4. Data Sharing & Disclosure</h2>
+                            <p>We do not sell or rent your personal data. We may share information with:</p>
+                            <ul>
+                                <li><strong>Service Providers:</strong> Third-party vendors assisting with messaging, analytics, or customer support (under strict confidentiality agreements).</li>
+                                <li><strong>Legal Authorities:</strong> If required by law (e.g., court orders, fraud investigations).</li>
+                                <li><strong>Meta (WhatsApp):</strong> As per their Business Terms of Service.</li>
+                            </ul>
+                        </div>
+                    
+                        <div class="section" id="data-retention">
+                            <h2>5. Data Retention</h2>
+                            <p>We retain your WhatsApp messages and data only as long as necessary for:</p>
+                            <ul>
+                                <li>Fulfilling the purpose of communication.</li>
+                                <li>Legal/compliance requirements.</li>
+                                <li>Resolving disputes or enforcing agreements.</li>
+                            </ul>
+                            <p>You may request deletion of your data (see Section 7).</p>
+                        </div>
+                    
+                        <div class="section" id="security">
+                            <h2>6. Security Measures</h2>
+                            <p>We implement technical and organizational safeguards, including:</p>
+                            <ul>
+                                <li>Encryption (WhatsApp provides end-to-end encryption for messages).</li>
+                                <li>Access controls to restrict internal data handling.</li>
+                                <li>Regular security audits.</li>
+                            </ul>
+                        </div>
+                    
+                        <div class="section" id="your-rights">
+                            <h2>7. Your Rights</h2>
+                            <p>Depending on your jurisdiction, you may:</p>
+                            <ul>
+                                <li>Access, correct, or delete your personal data.</li>
+                                <li>Opt out of non-transactional messages (reply "STOP").</li>
+                                <li>Withdraw consent (contact us at echelonequipmentimports@gmail.com/+263777222217).</li>
+                            </ul>
+                            <p>To exercise these rights, email Takudzwa Zvakasikwa at <a href="mailto:takudzwazvaks@gmail.com">takudzwazvaks@gmail.com</a>.</p>
+                        </div>
+                    
+                        <div class="section" id="updates">
+                            <h2>8. Updates to This Policy</h2>
+                            <p>We may update this Privacy Policy periodically. The latest version will be posted on <a href="https://eds-dfym.onrender.com/"> Our Website</a>.</p>
+                        </div>
+                        <div class="section" id="contact">
+                            <h2>9. Contact Us</h2>
+                            <div class="contact-info">
+                                <p>For questions or complaints, contact:</p>
+                                <p><strong>Echelon Digital Solutions</strong><br>
+                                20 Peakwood Village, 41 Cecil Road, Greendale, Harare<br>
+                                Email: <a href="mailto:echelonequipmentimports@gmail.com">echelonequipmentimports@gmail.com</a><br>
+                                Phone: +263 777222217</p>
+                                <p>For Meta/WhatsApp's data practices, review their <a href="https://www.facebook.com/privacy/policy/">Privacy Policy</a>.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Our Core Services</h2>
+                    <p class="mb-5">We offer comprehensive software development services tailored to meet your enterprise needs</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-laptop"></i>
+                        </div>
+                        <h4>Custom Software Development</h4>
+                        <p>Tailored solutions designed specifically for your business processes and requirements, built with scalability and security in mind.</p>
+                        <a href="#" class="text-primary">Learn More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-cloud"></i>
+                        </div>
+                        <h4>Cloud Solutions</h4>
+                        <p>Migrate your operations to the cloud with our secure, scalable, and cost-effective cloud computing solutions.</p>
+                        <a href="#" class="text-primary">Learn More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <h4>Enterprise Security</h4>
+                        <p>Comprehensive security solutions including risk assessment, penetration testing, and secure system architecture.</p>
+                        <a href="#" class="text-primary">Learn More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h4>Business Intelligence</h4>
+                        <p>Transform your data into actionable insights with our advanced analytics and reporting solutions.</p>
+                        <a href="#" class="text-primary">Learn More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <h4>Mobile Applications</h4>
+                        <p>Extend your enterprise capabilities to mobile devices with our cross-platform mobile solutions.</p>
+                        <a href="#" class="text-primary">Learn More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                        <h4>System Integration</h4>
+                        <p>Seamlessly connect your existing systems with new solutions for unified operations.</p>
+                        <a href="#" class="text-primary">Learn More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Showcase -->
+    <section id="solutions" class="solutions-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Our Enterprise Solutions</h2>
+                    <p class="mb-5">Comprehensive software solutions designed to optimize your business operations</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-pills solutions-tabs justify-content-center" id="solutions-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="leave-tab" data-bs-toggle="pill" data-bs-target="#leave-management" type="button" role="tab">Leave Management</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="treasury-tab" data-bs-toggle="pill" data-bs-target="#treasury-system" type="button" role="tab">Treasury System</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="erm-tab" data-bs-toggle="pill" data-bs-target="#erm-system" type="button" role="tab">ERM System</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="payroll-tab" data-bs-toggle="pill" data-bs-target="#payroll-system" type="button" role="tab">Payroll System</button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content mt-5" id="solutions-tabContent">
+                        <!-- Leave Management Solution -->
+                        <div class="tab-pane fade show active solution-tab-content" id="leave-management" role="tabpanel" aria-labelledby="leave-tab">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <h3>Advanced Leave Management System</h3>
+                                    <p>Streamline your employee leave processes with our comprehensive leave management solution that automates requests, approvals, and tracking.</p>
+                                    <ul class="about-features">
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Automated leave request and approval workflows</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Real-time leave balance tracking</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Customizable leave policies by department/role</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Integration with payroll and HR systems</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Mobile access for employees and managers via WhatsApp</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Comprehensive reporting and analytics</li>
+                                    </ul>
+                                    <a  href="{{ url_for('explore_lms') }}" class="btn btn-primary mt-3">Explore <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img src="{{ url_for('static', filename='images/lms.jpg') }}"  alt="Leave Management System" class="img-fluid solution-img">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Treasury System -->
+                        <div class="tab-pane fade solution-tab-content" id="treasury-system" role="tabpanel" aria-labelledby="treasury-tab">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <h3>Comprehensive Treasury Management System</h3>
+                                    <p>Gain complete visibility and control over your organization's cash flow, investments, and financial risk with our advanced treasury solution.</p>
+                                    <ul class="about-features">
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Real-time cash position monitoring</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Automated bank reconciliation</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Investment portfolio management</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Debt and loan tracking</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Foreign exchange risk management</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Compliance and audit reporting</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-primary mt-3">Request Demo</a>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img src="https://via.placeholder.com/600x400?text=Treasury+System" alt="Treasury Management System" class="img-fluid solution-img">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ERM System -->
+                        <div class="tab-pane fade solution-tab-content" id="erm-system" role="tabpanel" aria-labelledby="erm-tab">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <h3>Enterprise Risk Management Platform</h3>
+                                    <p>Identify, assess, and mitigate risks across your organization with our comprehensive ERM solution that provides real-time risk visibility.</p>
+                                    <ul class="about-features">
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Risk identification and assessment tools</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Automated risk monitoring</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Compliance management</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Incident reporting and tracking</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Business continuity planning</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Executive dashboards and reporting</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-primary mt-3">Request Demo</a>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img src="https://via.placeholder.com/600x400?text=ERM+System" alt="Enterprise Risk Management System" class="img-fluid solution-img">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payroll System -->
+                        <div class="tab-pane fade solution-tab-content" id="payroll-system" role="tabpanel" aria-labelledby="payroll-tab">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <h3>Integrated Payroll Management System</h3>
+                                    <p>Automate and streamline your payroll processes with our comprehensive solution that handles everything from calculations to compliance.</p>
+                                    <ul class="about-features">
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Automated payroll processing</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Tax calculation and filing</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Employee self-service portal</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Benefits administration</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Time and attendance integration</li>
+                                        <li><i class="bi bi-check-circle-fill text-accent"></i> Multi-country compliance</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-primary mt-3">Request Demo</a>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img src="https://via.placeholder.com/600x400?text=Payroll+System" alt="Payroll Management System" class="img-fluid solution-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item text-center">
+                        <div class="stat-number" data-count="250">0</div>
+                        <div class="stat-label">Enterprise Clients</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item text-center">
+                        <div class="stat-number" data-count="15">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item text-center">
+                        <div class="stat-number" data-count="500">0</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item text-center">
+                        <div class="stat-number" data-count="99">0</div>
+                        <div class="stat-label">% Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">What Our Clients Say</h2>
+                    <p class="mb-5">Trusted by leading organizations across industries</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="owl-carousel owl-theme testimonials-carousel">
+                        <!-- Testimonial 1 -->
+                        <div class="item">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    <p class="testimonial-text">NexusTech's leave management system transformed our HR operations, reducing administrative workload by 60% and improving employee satisfaction with the streamlined process.</p>
+                                    <div class="testimonial-author">
+                                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson">
+                                        <div class="author-info">
+                                            <h5>Sarah Johnson</h5>
+                                            <p>HR Director, TechCorp</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="item">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    <p class="testimonial-text">The treasury system implementation was seamless and has given us real-time visibility into our cash positions across 12 countries. The support team is exceptional.</p>
+                                    <div class="testimonial-author">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                                        <div class="author-info">
+                                            <h5>Michael Chen</h5>
+                                            <p>CFO, Global Financial</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="item">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    <p class="testimonial-text">Their ERM solution helped us establish a risk-aware culture throughout our organization. The dashboards and reporting capabilities are exactly what our executives needed.</p>
+                                    <div class="testimonial-author">
+                                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya Patel">
+                                        <div class="author-info">
+                                            <h5>Priya Patel</h5>
+                                            <p>Risk Manager, Fortune 500</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Trusted By Industry Leaders</h2>
+                    <p class="mb-5">We're proud to partner with organizations across various sectors</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="owl-carousel owl-theme clients-carousel">
+                        <div class="item">
+                            <img src="https://via.placeholder.com/150x80?text=Client+1" alt="Client Logo" class="client-logo">
+                        </div>
+                        <div class="item">
+                            <img src="https://via.placeholder.com/150x80?text=Client+2" alt="Client Logo" class="client-logo">
+                        </div>
+                        <div class="item">
+                            <img src="https://via.placeholder.com/150x80?text=Client+3" alt="Client Logo" class="client-logo">
+                        </div>
+                        <div class="item">
+                            <img src="https://via.placeholder.com/150x80?text=Client+4" alt="Client Logo" class="client-logo">
+                        </div>
+                        <div class="item">
+                            <img src="https://via.placeholder.com/150x80?text=Client+5" alt="Client Logo" class="client-logo">
+                        </div>
+                        <div class="item">
+                            <img src="https://via.placeholder.com/150x80?text=Client+6" alt="Client Logo" class="client-logo">
+                        </div>
+                        <div class="item">
+                            <img src="https://via.placeholder.com/150x80?text=Client+7" alt="Client Logo" class="client-logo">
+                        </div>
+                        <div class="item">
+                            <img src="https://via.placeholder.com/150x80?text=Client+8" alt="Client Logo" class="client-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center cta-content">
+                    <h2 class="mb-4">Ready to Transform Your Business?</h2>
+                    <p class="mb-5">Schedule a personalized demo to see how our solutions can address your specific challenges and drive operational excellence in your organization.</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn btn-light me-3">Request Demo</a>
+                        <a href="#contact" class="btn btn-outline-light">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="mb-5">Have questions or ready to get started? Our team is here to help.</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="contact-info">
+                        <div class="contact-item d-flex mb-4">
+                            <div class="icon-box bg-primary text-white me-4">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Our Location</h5>
+                                <p>Peakwood Village, 41 Cecil Road, Greendale, Harare, Zimbabwe</p>
+                            </div>
+                        </div>
+                        <div class="contact-item d-flex mb-4">
+                            <div class="icon-box bg-primary text-white me-4">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div>
+                                <h5>Email Us</h5>
+                                <p>echelonequipmentimports@gmail.com<br>sales@nexustech.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item d-flex">
+                            <div class="icon-box bg-primary text-white me-4">
+                                <i class="bi bi-phone"></i>
+                            </div>
+                            <div>
+                                <h5>Call Us</h5>
+                                <p>+263777222217<br>+263774822568</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <form class="contact-form">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" class="form-control" placeholder="Subject">
+                        </div>
+                        <div class="mb-4">
+                            <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <img src="https://via.placeholder.com/180x50?text=NexusTech" alt="NexusTech Solutions" class="footer-logo">
+                    <div class="footer-about">
+                        <p>Echelon Digital Solutions is a leading provider of enterprise software solutions, helping organizations streamline operations and drive growth through innovative technology.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-twitter"></i></a>
+                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Solutions</h5>
+                        <ul>
+                            <li><a href="#">Leave Management</a></li>
+                            <li><a href="#">Treasury Systems</a></li>
+                            <li><a href="#">ERM Solutions</a></li>
+                            <li><a href="#">Payroll Systems</a></li>
+                            <li><a href="#">HR Management</a></li>
+                            <li><a href="#">Custom Solutions</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Services</h5>
+                        <ul>
+                            <li><a href="#">Custom Development</a></li>
+                            <li><a href="#">Cloud Solutions</a></li>
+                            <li><a href="#">Enterprise Security</a></li>
+                            <li><a href="#">Business Intelligence</a></li>
+                            <li><a href="#">Mobile Applications</a></li>
+                            <li><a href="#">System Integration</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Company</h5>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Leadership</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">News & Events</a></li>
+                            <li><a href="#">Case Studies</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h5>Resources</h5>
+                        <ul>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Whitepapers</a></li>
+                            <li><a href="#">Webinars</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">Support Center</a></li>
+                            <li><a href="#">API Reference</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="copyright">© 2025 Echelon Digital Solutions. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="/echelon-digital-solutions-privacy-policy" class="copyright me-3" style="cursor: pointer;">Privacy Policy</a>
+                        <a href="#" class="copyright">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+    
+    <script>
+        // Navbar scroll effect
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+        });
+        
+        // Back to top button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 300) {
+                $('.back-to-top').addClass('active');
+            } else {
+                $('.back-to-top').removeClass('active');
+            }
+        });
+        
+        $('.back-to-top').click(function(e) {
+            e.preventDefault();
+            $('html, body').animate({scrollTop: 0}, '300');
+        });
+        
+        // Counter animation
+        $('.stat-number').each(function () {
+            $(this).prop('Counter', 0).animate({
+                Counter: $(this).text()
+            }, {
+                duration: 4000,
+                easing: 'swing',
+                step: function (now) {
+                    $(this).text(Math.ceil(now));
+                }
+            });
+        });
+        
+        // Testimonials carousel
+        $('.testimonials-carousel').owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: true,
+            dots: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 2
+                },
+                992: {
+                    items: 3
+                }
+            }
+        });
+        
+        // Clients carousel
+        $('.clients-carousel').owlCarousel({
+            loop: true,
+            margin: 30,
+            nav: false,
+            dots: true,
+            autoplay: true,
+            responsive: {
+                0: {
+                    items: 2
+                },
+                576: {
+                    items: 3
+                },
+                768: {
+                    items: 4
+                },
+                992: {
+                    items: 6
+                }
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        $('a[href*="#"]').on('click', function(e) {
+            e.preventDefault();
+            
+            $('html, body').animate(
+                {
+                    scrollTop: $($(this).attr('href')).offset().top - 70,
+                },
+                500,
+                'linear'
+            );
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HR Admin Dashboard</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <style>
+        /* Main Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #f0f2f5, #e9f1fb);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background-color: #003366;
+            color: #fff;
+            padding-top: 40px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+            transition: width 0.3s;
+        }
+
+        .sidebar:hover {
+            width: 270px;
+        }
+
+        .sidebar h5 {
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar .btn {
+            color: #003366;
+            background-color: #fff;
+            width: 80%;
+            margin: 5px 0;
+            padding: 5px;
+            border: 3px solid #003366;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .sidebar .btn:hover {
+            background-color: #003366;
+            color: #fff;
+            border: 3px solid white;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary{
+            color: white;
+            background-color: #003366;
+            width: 15%;
+            margin: 8px 0;
+            padding: 5px;
+            border-radius: 8px;
+            border: 3px solid #003366;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            text-align: center;
+            font-weight: 500;
+
+        }
+        .btn-primary:hover{
+            background-color: white;
+            color: #003366;
+            border: 3px solid #003366;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary2{
+            color: white;
+            background-color: #003366;
+            width: 37%;
+            margin: 8px 0;
+            padding: 8px;
+            border-radius: 8px;
+            border: 3px solid #003366;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            text-align: center;
+            font-weight: 500;
+
+        }
+        .btn-primary2:hover{
+            background-color: white;
+            color: #003366;
+            border: 3px solid #003366;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary3{
+            color: white;
+            background-color: #003366;
+            width: 100%;
+            padding: 3px;
+            border-radius: 8px;
+            border: 3px solid #003366;
+            font-size: 13px;
+            transition: background 0.3s;
+            text-align: center;
+            font-weight: 500;
+
+        }
+        .form-control-blue {
+            background-color: #00336611; /* Example */
+            border: 1px solid #ccc;
+            appearance: auto; /* Ensure native dropdown appearance */
+        }
+
+
+        .btn-primary3:hover{
+            background-color: white;
+            color: #003366;
+            border: 3px solid #003366;
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            margin-left: 270px;
+            padding: 30px;
+            width: calc(100% - 270px);
+            background-color: #ffffff;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #e9f1fb;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .current-date {
+            color: #003366;
+            font-weight: bold;
+            font-size: smaller;
+            font-size: 1rem;
+        }
+
+        .employeetag {
+            color: #003366;;
+            font-size: 1rem;
+            font-weight: 500;
+            font-weight: bold;
+        }
+
+        /* Tab Styling */
+        .nav-tabs .nav-link {
+            color: #003366;
+            font-weight: 500;
+            padding: 10px 16px;
+            font-size: 14px;
+            border-radius: 8px 8px 0 0;
+            background: #e9f1fb;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #ffffff;
+            background-color: #003366;
+            font-weight: 700;
+        }
+
+        /* Card Styling */
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #ffffff;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            }
+
+        .form-group {
+            margin-bottom: 20px; /* Increase vertical spacing between fields */
+            }
+
+        .btn-center {
+            display: flex;
+            justify-content: center;
+            justify-content: space-between; 
+            gap: 10px;
+            }
+
+        .form-control-blue::after {
+            content: '\25BC'; /* Unicode for downwards triangle */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white; /* Arrow color */
+            font-size: 16px;
+        }
+
+        /* Style for disabled option (making it grey) */
+        .form-control-blue option:disabled {
+            background-color: #A9A9A9; /* Grey background */
+            color: #D3D3D3; /* Grey text color */
+        }
+
+        .table-theme th {
+            background-color: #003366;
+            color: white;
+            text-align: center !important;
+            vertical-align: middle !important;
+            font-size: 12px;
+            padding: 5px; /* Add padding for better spacing */
+            font-weight: bold; /* Optional: make text bold for clarity */
+
+        }
+
+        #employeesTable th{
+            position: sticky;
+            top: 0; /* Stick to the top when scrolling */
+            z-index: 1; /* Ensure headers are above the table content */
+            
+        }
+        .table-theme td {
+            text-align: center;
+            white-space: normal; /* Allow line breaks */
+            border-bottom: 1px solid #ddd; /* Add horizontal borders between rows */
+        }
+        .table-theme td:nth-child(5), .table-theme th:nth-child(5) {
+            padding: 2px; /* Adjust the padding as per your preference */
+        }
+        .container2 {
+            font-size: 13px;
+            margin-top: -2rem;
+        }
+        /* Custom scrollbar styling */
+        .container2::-webkit-scrollbar {
+            width: 10px; /* Width of the scrollbar */
+        }
+
+        .container2::-webkit-scrollbar-thumb {
+            background-color: #003366; /* Scrollbar thumb color */
+            border-radius: 5px; /* Rounded corners for thumb */
+        }
+
+        .container2::-webkit-scrollbar-thumb:hover {
+            background-color: #0055aa; /* Hover color for thumb */
+        }
+
+        .container2::-webkit-scrollbar-track {
+            background-color: #f0f0f0; /* Scrollbar track color */
+            border-radius: 5px; /* Rounded corners for track */
+        }
+        .form-group label{
+            font-weight: bold;
+        }
+        /* For WebKit-based browsers (Chrome, Edge, Safari) */
+        #employeeList::-webkit-scrollbar {
+            width: 15px; /* Width of the scrollbar */
+        }
+
+        #employeeList::-webkit-scrollbar-thumb {
+            background-color: #003366; /* Blue color for the scrollbar handle */
+            border-radius: 5px; /* Rounded scrollbar handle */
+        }
+
+        #employeeList::-webkit-scrollbar-track {
+            background-color: #f1f1f1; /* Background color of the scrollbar track */
+        }
+
+        /* For Firefox */
+        #employeeList {
+            scrollbar-color: #003366 #f1f1f1; /* Handle color followed by track color */
+        }
+        select.form-control-blue option:hover {
+            background-color: #e6f0ff; /* Light blue on hover */
+            color: #003366; /* Dark blue text */
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div class="sidebar">
+    <img src="{{ url_for('static', filename='images/EDS LOGO.png') }}" alt="Logo">
+    <h5>Leave Management System</h5>
+    <button id="btn-dashboard" class="btn">Dashboard</button>
+    <button id="btn-leave-apps-portal" class="btn">Leave Applications</button>
+    <button id="btn-employee-profiles" class="btn">Employee Profiles</button>
+    <button id="btn-employee-profiles" class="btn">Company Info</button>
+    <button id="btn-employee-profiles" class="btn">Log Query</button>
+    <button onclick="window.location.href='/logout_HR_admin'" class="btn btn-danger">Logout</button>
+</div>
+
+<main class="main-content">
+    <header>
+        <div class="employeetag">{{firstname}} {{surname}}, {{company_name}} LMS Administrator</div>
+        <div>Today's Date: <span class="current-date">{{ today_date }}</span></div>
+
+    </header>
+
+    <div class="card">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#dashboard-tab">Dashboard</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#leave-apps-tab">Leave Applications Portal</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#employee-profiles-tab">Employee Profiles & Priviledges</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#settings">Company Profile & Payments</button>
+            </li>
+        </ul>
+        <div class="tab-content mt-4">
+            <div class="tab-pane fade show active" id="dashboard-tab">
+                <h4>Dashboard Overview</h4>
+                <p>View overall statistics and leave management insights here.</p>
+            </div>
+            <div class="tab-pane fade" id="leave-apps-tab">
+                <h4>Leave Applications</h4>
+                <p>Manage employee leave requests and track approvals here.</p>
+            </div>
+            <div class="tab-pane fade" id="employee-profiles-tab">
+                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">Add New Employee(s)</button>
+                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#RemoveEmployeeModal">Remove Employee(s)</button>
+                <div class="container mt-5">
+                    <div class="container2" style="max-height: 470px; overflow-y: auto;">
+                        {{ table_employees_html|safe }}
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="tab-pane fade" id="settings">
+                <h4>Payments</h4>
+                <p>Manage Payments</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEmployeeModalLabel">ADD EMPLOYEES</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Select an option to add employees:</p>
+                <div class="d-flex justify-content-around">
+                    <button class="btn btn-primary2 mt-3" onclick="manualAdd()">Add Manually</button>
+                    <button class="btn btn-primary2 mt-3" onclick="importFromExcel()">Import from Excel File</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RemoveEmployeeModal" tabindex="-1" aria-labelledby="RemoveEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="RemoveEmployeeModalLabel">REMOVE EMPLOYEES</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/submit" method="POST">
+                    <label for="privileges">Select Employee(s) To Remove From Your LMS:</label>
+                    
+                    <!-- Search Input -->
+                    <input type="text" id="employeeSearch" onkeyup="searchEmployees()" placeholder="Search Employees..." class="form-control" style="margin-bottom: 10px;">
+                
+                    <!-- Scrollable Employee List -->
+                    <div id="employeeList" style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; padding: 5px;">
+                        {% for employee in employees_list %}
+                            <div class="employee-item">
+                                <input type="checkbox" name="selected_employees" value="{{ employee }}" id="employee_{{ employee }}">
+                                <label for="employee_{{ employee }}">{{ employee }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                
+                    <button type="submit" class="btn btn-primary2" style="width: 50%;">Remove Selected Employee(s)</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="manualaddemployeeModal" tabindex="-1" role="dialog" aria-labelledby="manualaddemployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="manualaddemployeeModalLabel">MANUAL EMPLOYEE ADDITIONS</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        </div>
+        <div class="modal-body" >
+          <form method="POST" action="/manual_add_employee">
+            <div class="form-group">
+                <label for="firstname">Employee First Name</label>
+                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter Employee First Name" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="surname">Employee Surname</label>
+                <input type="text" class="form-control" name="surname" id="surname" placeholder="Enter Employee Surname" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Employee Email Address</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Enter Employee Email Address" required>
+              </div>
+            <div class="form-group">
+                <label for="privileges">Employee Privileges</label>
+                <select class="form-control form-control-blue" name="privileges" id="privileges" required>
+                  <option value="" disabled selected>Select privilege</option>
+                  <option value="adminordinary">Administrator & Ordinary</option>
+                  <option value="adminapproveryes">Administrator & Leave Applications Approver</option>
+                  <option value="approver">Leave Applications Approver</option>
+                  <option value="ordinary">Ordinary</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="leaveapplicationsapprover">Leave Applications Approver</label>
+                <select id="employeeList" name="selected_employees" class="form-control form-control-blue" style="max-height: 200px; overflow-y: auto; border: 1px solid #003366; padding: 5px;">
+                
+                  <option value="" disabled selected>Select Approver</option>
+                  
+                  {% for employee in employees_list %}
+                    <option value="{{ employee }}">{{ employee }}</option>
+                  {% endfor %}
+                </select>             
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" name="currentleavedays" placeholder="Employee Current Leave Days Balance" required>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" name="monthlyaccumulation" placeholder="Employee Leave Days accumulation per month" required>
+            </div>
+            <input type="hidden" id="company_name" name="company_name" value="{{ company_name }}">
+            <div class="btn-center">
+                <button type="submit" class="btn btn-primary2 btn-block shadow">Save</button>
+                <button class="btn btn-primary2 btn-block shadow" id="cancel_add_emplyee_manual">Cancel</button>
+            </div> 
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="AdminModal" tabindex="-1" role="dialog" aria-labelledby="AdminModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"> 
+        <div class="modal-header">
+          <h5 class="modal-title" >ADMINISTRATOR INFO</h5>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="/admin-modal">
+            <div class="form-group">
+                <label for="privileges">Does this Administrator also approve Leave applications?</label>
+                <select class="form-control form-control-blue" name="privileges" id="privileges" required>
+                    <option value="" disabled selected>Select Option</option>
+                    <option value="adminapproveryes">Yes</option>
+                    <option value="adminordinary">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="currentleavedays">Enter Administrator Current Leave Days Balance</label>
+                <input type="number" class="form-control" name="currentleavedays" placeholder="" required>
+            </div>
+            <div class="form-group">
+                <label for="currentleavedays">Enter Administrator Leave Days accumulation per month</label>
+                <input type="number" class="form-control" name="monthlyaccumulation" placeholder="" required>
+            </div>
+            <input type="hidden" id="company_name"  name="company_name" value="{{ company_name }}">
+            <input type="hidden" id="email" name="email" value="{{ email }}">
+            <input type="hidden" id="firstname" name="firstname" value="{{ firstname }}">
+            <input type="hidden" id="surname" name="surname" value="{{ surname }}">
+
+            <div class="btn-center">
+                <button type="submit" class="btn btn-primary2 btn-block shadow">Save</button>
+            </div> 
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editModalpriv" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">EDIT {Employee name}'s PRIVILEDGES</h5>
+          <button type="button" id="btn-close-priv" class="btn-close-priv" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        </div>
+        <div class="modal-body">
+          <form id="editPrivilegesForm">
+            <div class="form-group">
+              <label for="privileges">Select Privilege</label>
+              <select id="privileges" class="form-control form-control-blue" name="privileges" required>
+                <option value="" disabled selected>Select privilege</option>
+                <option value="adminordinary">Administrator & Ordinary</option>
+                <option value="adminapproveryes">Administrator & Leave Applications Approver</option>
+                <option value="approver">Leave Applications Approver</option>
+                <option value="ordinary">Ordinary</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closepriv">Close</button>
+          <button type="button" class="btn btn-primary" id="savePrivileges">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bootstrap and jQuery Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<script>
+$(document).ready(function () {
+    if (sessionStorage.getItem('showAdminModal') === 'true') {
+        $('#AdminModal').modal('show');
+        sessionStorage.removeItem('showAdminModal'); 
+    }
+});
+
+$('#btn-dashboard').click(function() {
+        $('#dashboard-tab').tab('show');
+    });
+
+    // Toggle to 'Leave Applications' tab
+    $('#btn-leave-apps-portal').click(function() {
+        $('#leave-apps-tab').tab('show');
+    });
+
+$(document).on('click', '.edit-btn', function() {
+    var currentPrivilege = $(this).data('privilege');  
+    $('#privileges').val(currentPrivilege); 
+    $('#editModalpriv').modal('show'); 
+});
+
+$('#closepriv').on('click', function() {
+    $('#editModal').modal('hide'); 
+});
+
+$('#cancel_add_emplyee_manual').on('click', function() {
+    $('#manualaddemployeeModal').modal('hide'); 
+});
+
+$('#btn-close-priv').on('click', function() {
+    $('#editModalpriv').modal('hide'); 
+});
+
+$('#savePrivileges').on('click', function() {
+    var newPrivilege = $('#privileges').val(); 
+    if (newPrivilege) {
+        
+        $.ajax({
+            url: '/update_privilege',  // Change to your desired endpoint
+            method: 'POST',
+            data: {
+                privilege: newPrivilege,
+                // Add other necessary data here, like the user ID or record ID
+            },
+            success: function(response) {
+                // Handle success (e.g., close the modal, update the UI, etc.)
+                $('#editModal').modal('hide');
+                alert('Privilege updated successfully!');
+                // Optionally, you can also update the privilege directly on the table row without reloading
+                $('#privilege-' + response.user_id).text(newPrivilege);  // Example of updating a table cell
+            },
+            error: function(error) {
+                // Handle error
+                alert('Error updating privilege. Please try again.');
+            }
+        });
+    } else {
+        alert('Please select a privilege.');
+    }
+});
+
+
+  </script>
+<script>
+    $(document).ready(function () {
+        // Ensure the table has an id
+        $('table').attr('id', 'employeesTable');
+
+        // Initialize DataTables
+        $('#employeesTable').DataTable({
+            paging: false,    // Enable pagination
+            searching: true, // Enable search
+            ordering: true,  // Enable sorting
+            info: true,      // Show table information
+        });
+    });
+</script>
+
+<script>
+
+  function manualAdd() {
+    // Optional alert or additional logic
+    //alert("Manual Add option selected");
+    
+    // Show the modal
+    $('#manualaddemployeeModal').modal('show');
+    }
+
+    function importFromExcel() {
+        // Code to handle import from Excel
+        alert("Import from Excel File option selected");
+    }
+</script>
+<script>
+    // Function to filter employees based on search input
+    function searchEmployees() {
+        var input, filter, list, items, label, i;
+        input = document.getElementById('employeeSearch');
+        filter = input.value.toLowerCase();
+        list = document.getElementById('employeeList');
+        items = list.getElementsByClassName('employee-item');
+
+        // Loop through the items and hide those that do not match the search query
+        for (i = 0; i < items.length; i++) {
+            label = items[i].getElementsByTagName('label')[0];
+            if (label) {
+                if (label.innerText.toLowerCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

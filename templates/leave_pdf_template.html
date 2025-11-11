@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ app.company_name }} Leave Application [ID {{app.reference_number}}] </title>
+    <style>
+        /* Modern print styling */
+        @page {
+            size: A4;  /* Custom size */
+            margin: 20mm;
+            @top-center {
+                content: element(pageHeader);
+            }
+            @bottom-center {
+                content: element(pageFooter);
+            }
+        }
+
+        .footer-logo {
+            height: 10px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;
+            color: #2d3748;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #pageHeader {
+            position: running(pageHeader);
+            width: 100%;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 10pt;
+            color: #4a5568;
+        }
+        
+        #pageFooter {
+            position: running(pageFooter);
+            width: 100%;
+            text-align: center;
+            padding-top: 5px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 8pt;
+            color: #718096;
+        }
+        
+        .document-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .letterhead {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #003366;
+        }
+        
+        .company-info h2 {
+            color: #003366;
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .company-info p {
+            margin: 3px 0 0;
+            font-size: 10px;
+            color: #4a5568;
+        }
+        
+        .status-badge {
+            background: linear-gradient(135deg, #006699 0%, #004d80 100%);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        
+        h1.document-title {
+            text-align: center;
+            color: #003366;
+            font-size: 20px;
+            margin: 0 0 20px;
+            font-weight: 600;
+        }
+        
+        .details-card {
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 51, 102, 0.08);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .details-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .details-table th {
+            background-color: #f7fafc;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 10px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        
+        .details-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 12px;
+        }
+        
+        .details-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .reason-box {
+            background: #f8fafc;
+            border-left: 3px solid #006699;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .reason-box p {
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            margin-top: 17px;
+            font-size: 10px;
+            color: #718096;
+            text-align: center;
+        }
+        
+        .watermark {
+            position: fixed;
+            bottom: 50%;
+            right: 50%;
+            transform: translate(50%, 50%) rotate(-30deg);
+            opacity: 0.1;
+            font-size: 120px;
+            font-weight: bold;
+            color: #003366;
+            pointer-events: none;
+            z-index: 8;
+        }
+    </style>
+</head>
+<body>
+    <div id="pageHeader">
+        {{ app.company_name }} | Leave Application Slip
+    </div>
+    
+    <div id="pageFooter">
+        Page <span class="pageNumber"></span> | Generated on {{ app.generated_on }} <br> Powered by {{ app.power }}
+    </div>
+    
+    <div class="document-container">
+        <div class="letterhead">
+            <div class="company-info">
+                <h2>LEAVE APPLICATION STATUS [APP ID: {{app.reference_number}}]</h2>
+            </div>
+            <div class="status-badge">{{ app.status }}</div>
+        </div>
+        
+        <h1 class="document-title">LEAVE APPLICATION DETAILS</h1>
+        
+        <div class="details-card">
+            <table class="details-table">
+                <tr>
+                    <th>Employee Name</th>
+                    <td>{{ app.employee_name }}</td>
+                </tr>
+                <tr>
+                    <th>Department</th>
+                    <td>{{ app.department }}</td>
+                </tr>
+                <tr>
+                    <th>Leave Type</th>
+                    <td>{{ app.leave_type }} Leave</td>
+                </tr>
+                <tr>
+                    <th>Date Applied</th>
+                    <td>{{ app.date_applied }}</td>
+                </tr>
+                <tr>
+                    <th>Initial Leave Days Balance</th>
+                    <td>{{ app.currentleavedaysbalance }} days</td>
+                </tr>
+                <tr>
+                    <th>Date Range</th>
+                    <td>{{ app.start_date }} to {{ app.end_date }}</td>
+                </tr>
+                <tr>
+                    <th>Total Days</th>
+                    <td>{{ app.days_requested }} working days</td>
+                </tr>
+                <tr>
+                    <th>New Leave Days Balance</th>
+                    <td>{{ app.new_balance }} days</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="reason-box">
+            <p><strong>LEAVE APPLICATION APPROVAL DETAILS</strong></p>
+        </div>
+        
+        <div class="details-card">
+            <table class="details-table">
+                <tr>
+                    <th>Approved By</th>
+                    <td>{{ app.approver_name }}</td>
+                </tr>
+                <tr>
+                    <th>Approval Date</th>
+                    <td>{{ app.approved_date }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="reason-box">
+            <p><strong>EMPLOYEE CONTACT DETAILS DURING LEAVE</strong></p>
+        </div>
+
+        <div class="details-card">
+            <table class="details-table">
+                <tr>
+                    <th>Physical Address</th>
+                    <td>{{ app.address }}</td>
+                </tr>
+                <tr>
+                    <th>WhatsApp Number</th>
+                    <td>{{ app.whatsapp }}</td>
+                </tr>
+                <tr>
+                    <th>Email Address</th>
+                    <td>{{ app.email }}</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="watermark">APPROVED</div>
+    </div>
+    
+    <div class="footer">
+        <p>This is an official document of {{ app.company_name }}. Unauthorised edits and(or) use is prohibited.</p>
+    </div>
+</body>
+</html>

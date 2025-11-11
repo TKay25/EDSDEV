@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS HR Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Main Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background-color: #003366;
+            color: #fff;
+            padding-top: 40px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+            transition: width 0.3s;
+        }
+
+        .sidebar:hover {
+            width: 270px;
+        }
+
+        .sidebar h4 {
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar .btn {
+            color: #003366;
+            background-color: #fff;
+            width: 90%;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .sidebar .btn:hover {
+            background-color: #4169e1;
+            color: #fff;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            margin-left: 270px;
+            padding: 30px;
+            width: calc(100% - 270px);
+            background-color: #ffffff;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #e9f1fb;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .current-date {
+            color: #003366;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .employeetag {
+            color: #555;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Tab Styling */
+        .nav-tabs .nav-link {
+            color: #003366;
+            font-weight: 500;
+            border: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            padding: 12px;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #003366;
+            background-color: #e9f1fb;
+            border-bottom: 2px solid #003366;
+            font-weight: 700;
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* Card Styling */
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #f9fbfd;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <img src="{{ url_for('static', filename='images/cbz hold logo.png') }}" alt="Logo">
+    <h4>Leave Management System</h4>
+    <button id="dashboard" class="btn">Dashboard</button>
+    <button id="btn-leave-apps-portal" class="btn">Leave Applications</button>
+    <button id="btn-employee-profiles" class="btn">Employee Profiles</button>
+    <button onclick="window.location.href='/logout_HR_admin'" class="btn btn-danger">Logout</button>
+</div>
+
+<main class="main-content">
+    <header>
+        <div>Today's Date: <span class="current-date">{{ today_date }}</span></div>
+        <div class="employeetag">Welcome, {{ HRAdminID }}, HR Admin</div>
+    </header>
+
+    <div class="card">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#dashboard-tab">Dashboard</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#leave-apps-tab">Applications</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#employee-profiles-tab">Profiles</button></li>
+        </ul>
+        <div class="tab-content mt-4">
+            <div class="tab-pane fade show active" id="dashboard-tab">
+                <h4>Dashboard</h4>
+                <p>Here you can view an overview of leave statistics and key metrics.</p>
+            </div>
+            <div class="tab-pane fade" id="leave-apps-tab">
+                <h4>Leave Applications</h4>
+                <p>View and manage leave applications here.</p>
+            </div>
+            <div class="tab-pane fade" id="employee-profiles-tab">
+                <h4>Employee Profiles</h4>
+                <p>Edit and update employee profiles here.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

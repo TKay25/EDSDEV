@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CAG TOURS — Ticket Receipt</title>
+<style>
+  @page { size: 90mm 220mm; margin: 5mm; }
+
+  body {
+    margin:0;
+    padding:0;
+    font-family: "Century Gothic", Arial, sans-serif;
+    background:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    line-height: 1.9;
+  }
+
+  .ticket {
+    position: relative; /* ✅ Needed for watermark */
+    width: 80mm;
+    border:1px solid #ccc;
+    border-radius:12px;
+    padding:12px;
+    margin-top: 17%;
+    box-sizing:border-box;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  /* ✅ Watermark style */
+  .ticket::before {
+    content: "WhatsApp";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 60px;
+    font-weight: bold;
+    font-style: oblique;
+    color: rgba(0, 128, 0, 0.15); /* WhatsApp green but very faint */
+    white-space: nowrap;
+    pointer-events: none; /* allow clicks through watermark */
+    z-index: 0;
+  }
+
+  .ticket > * {
+    position: relative;
+    z-index: 1; /* ✅ ensures content stays above watermark */
+  }
+
+  .brand {
+    text-align:center;
+    font-weight:bold;
+    font-size:20px;
+    color:#111827;
+    margin-bottom:2px;
+  }
+
+  .subtitle {
+    text-align:center;
+    font-size:13px;
+    margin-bottom:8px;
+    color:#6b7280;
+    letter-spacing:0.6px;
+  }
+
+  .ref {
+    text-align:center;
+    font-weight:bold;
+    border-top:1px dashed #d1d5db;
+    border-bottom:1px dashed #d1d5db;
+    padding:6px 0;
+    margin-bottom:8px;
+    font-size:12px;
+    color:#374151;
+  }
+
+  .kv { display:flex; justify-content:space-between; margin:4px 0; font-size:12px; }
+  .k { font-weight:bold; color:#6b7280; }
+  .v { 
+    text-align:right; 
+    font-weight:600; 
+    color:#111827; 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+  }
+
+  .pill {
+    display:inline-block;
+    background:#e5e7eb;
+    border-radius:12px;
+    padding:2px 6px;
+    font-size:11px;
+    font-weight:600;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+  }
+
+  .total { 
+    display:flex; justify-content:space-between; 
+    font-weight:bold; 
+    font-size:14px;
+    border-top:1px dashed #d1d5db;
+    padding-top:4px; 
+    margin-top:6px;
+    color:#111827;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+  }
+
+  .qr-wrap {
+    text-align:center; 
+    margin:10px 0;
+  }
+  .qr-wrap img {
+    width:80px; 
+    height:80px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    padding:4px;
+    background:#f9fafb;
+  }
+  .qr-caption {
+    font-size:10px; 
+    color:#6b7280; 
+    margin-top:2px;
+  }
+
+  .note {
+    font-size:10px;
+    border-top:1px dashed #d1d5db;
+    margin-top:6px;
+    padding-top:2px;
+    color:#374151;
+  }
+</style>
+</head>
+<body>
+  <div class="ticket">
+    <div class="brand">CAG TOURS (Pvt) Ltd</div>
+    <div class="subtitle">Bus Ticket Receipt</div>
+    <div class="ref">PAYNOW REF: <span class="v">{{app.ticketref}}</span></div>
+
+    <div class="kv"><div class="k">Ibizo:</div><div class="v">{{app.firstname}} {{app.surname}}</div></div>
+    <div class="kv"><div class="k">Ucingo:</div><div class="v">{{app.phone_number}}</div></div>
+    <div class="kv"><div class="k">Inombolo ye-ID:</div><div class="v">{{app.id_number}}</div></div>
+    <div class="kv"><div class="k">Indlela Yokuya:</div><div class="v">{{app.route}}</div></div>
+
+    <div class="kv"><div class="k">Usuku Lokuya:</div><div class="v">{{app.travel_date}}</div></div>
+    <div class="kv"><div class="k">Isikhathi Sokuvela:</div><div class="v">{{app.departure_time}}</div></div>
+    <div class="kv"><div class="k">Usuku Lokubhukha:</div><div class="v">{{app.booking_date}}</div></div>
+    <div class="kv"><div class="k">Amathikithi:</div><div class="v"><span class="pill">{{app.seats}}</span></div></div>
+    <div class="kv"><div class="k">Inkokhelo:</div><div class="v"><span class="pill">{{app.payment_method}}</span></div></div>
+
+    <div class="total"><span>Isamba</span><span>USD {{app.total_fare}}</span></div>
+
+    <div class="qr-wrap">
+      <img src="{{app.qr_img}}" alt="Ikhodi ye-QR">
+      <div class="qr-caption">Skana ukuze uthole imininingwane yokubhukha</div>
+    </div>
+
+    <div class="note">
+      <b>OKUBALULEKILE:</b>
+      <p>Fika imizuzu engu-15 ngaphambi kwesikhathi futhi walethe i-ID yakho.</p>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Table</title>
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Employee Data</h2>
+        <table id="employeeTable" class="data">
+            <!-- This table will be populated with the DataFrame -->
+            {% if df_employee %}
+                {{ df_employee.to_html(classes='data', index=False) | safe }}
+            {% else %}
+                <p>No data available</p>
+            {% endif %}
+        </table>
+    </div>
+
+    <style>
+        .data {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #e9f1fb; /* Light background */
+        }
+
+        .data th, .data td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            color: #003366; /* Dark theme color */
+        }
+
+        .data th {
+            background-color: #003366;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .data tr {
+            background-color: #ffffff;
+        }
+
+        .data tr:nth-child(even) {
+            background-color: #e9f1fb;
+        }
+
+        .data tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Additional DataTable custom styling */
+        .dataTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .dataTable th, .dataTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            color: #003366;
+        }
+
+        .dataTable th {
+            background-color: #003366;
+            color: #ffffff;
+        }
+
+        .dataTable tr {
+            background-color: #ffffff;
+        }
+
+        .dataTable tr:nth-child(even) {
+            background-color: #e9f1fb;
+        }
+
+        .dataTable tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $('#employeeTable').DataTable({
+                "responsive": true,
+                "autoWidth": false
+            });
+        });
+    </script>
+</body>
+</html>

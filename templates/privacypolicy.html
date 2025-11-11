@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Echelon Digital Solutions</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            border-radius: 5px 5px 0 0;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        h2 {
+            color: #003366;
+            border-bottom: 2px solid #003366;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        .last-updated {
+            font-style: italic;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .subsection {
+            margin-left: 15px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .contact-info {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-left: 4px solid #003366;
+            margin-top: 20px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            color: #666;
+        }
+        .toc {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #003366;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+            column-count: 2;
+        }
+        .toc li {
+            margin-bottom: 5px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #003366;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        /* Scrollable content container */
+        .scrollable-content {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 15px; /* Add space for scrollbar */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        /* Custom scrollbar styling */
+        .scrollable-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scrollable-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: #003366;
+            border-radius: 10px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb:hover {
+            background: #002244;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            border-radius: 20px;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #00214d;
+            border-color: #00214d;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        .btn {
+            margin: 10px;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <header>                
+        <img src="{{ url_for('static', filename='images/EDS LOGO.png') }}" alt="Logo" class="logo" style="width: 200px;">
+        <h1>Privacy Policy for Echelon Digital Solutions</h1>
+        <div class="last-updated">Last Updated: 28 February 2025</div>
+        <a href="/" ><button class="btn btn-primary"><i class="bi bi-arrow-left-circle" style="margin-right: 7px;"></i>Back</button></a>
+    </header>
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#information-we-collect">2. Information We Collect</a></li>
+            <li><a href="#how-we-use">3. How We Use Your Information</a></li>
+            <li><a href="#data-sharing">4. Data Sharing & Disclosure</a></li>
+            <li><a href="#data-retention">5. Data Retention</a></li>
+            <li><a href="#security">6. Security Measures</a></li>
+            <li><a href="#your-rights">7. Your Rights</a></li>
+            <li><a href="#updates">8. Updates to This Policy</a></li>
+            <li><a href="#contact">9. Contact Us</a></li>
+        </ul>
+    </div>
+
+    <div class="scrollable-content">
+        <div class="section" id="introduction">
+            <h2>1. Introduction</h2>
+            <p>Echelon Digital Solutions respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you interact with us through the WhatsApp Business API (provided by Meta).</p>
+            <p>By using our WhatsApp Business services, you consent to the practices described in this policy.</p>
+        </div>
+
+        <div class="section" id="information-we-collect">
+            <h2>2. Information We Collect</h2>
+            
+            <div class="subsection">
+                <h3>2.1. Information You Provide</h3>
+                <p>We may collect the following personal data when you communicate with us via WhatsApp:</p>
+                <ul>
+                    <li><strong>Contact Information:</strong> Phone number, name, email address (if provided).</li>
+                    <li><strong>Message Content:</strong> Text, images, videos, documents, or other files shared in conversations.</li>
+                    <li><strong>Transaction Details:</strong> Order confirmations, payment details (if applicable).</li>
+                </ul>
+            </div>
+            
+            <div class="subsection">
+                <h3>2.2. Information Automatically Collected</h3>
+                <ul>
+                    <li><strong>Metadata:</strong> Timestamps, message status (delivered, read), and interaction logs.</li>
+                    <li><strong>Device Information:</strong> IP address, device type, operating system (collected via WhatsApp's API).</li>
+                </ul>
+            </div>
+            
+            <div class="subsection">
+                <h3>2.3. Information from Third Parties</h3>
+                <p>If you interact with us through a linked Facebook/Instagram Business account, we may receive limited profile data (e.g., public name) as permitted by Meta's policies.</p>
+            </div>
+        </div>
+
+        <div class="section" id="how-we-use">
+            <h2>3. How We Use Your Information</h2>
+            <p>We use your data to:</p>
+            <ul>
+                <li>Provide customer support and respond to inquiries.</li>
+                <li>Process orders, bookings, or service requests.</li>
+                <li>Send transactional updates (e.g., shipping confirmations).</li>
+                <li>Improve our services and personalize user experiences.</li>
+                <li>Comply with legal obligations and prevent fraud.</li>
+            </ul>
+            <p>We do not use WhatsApp for telemedicine or to collect sensitive health/financial data unless explicitly consented and legally permitted.</p>
+        </div>
+
+        <div class="section" id="data-sharing">
+            <h2>4. Data Sharing & Disclosure</h2>
+            <p>We do not sell or rent your personal data. We may share information with:</p>
+            <ul>
+                <li><strong>Service Providers:</strong> Third-party vendors assisting with messaging, analytics, or customer support (under strict confidentiality agreements).</li>
+                <li><strong>Legal Authorities:</strong> If required by law (e.g., court orders, fraud investigations).</li>
+                <li><strong>Meta (WhatsApp):</strong> As per their Business Terms of Service.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="data-retention">
+            <h2>5. Data Retention</h2>
+            <p>We retain your WhatsApp messages and data only as long as necessary for:</p>
+            <ul>
+                <li>Fulfilling the purpose of communication.</li>
+                <li>Legal/compliance requirements.</li>
+                <li>Resolving disputes or enforcing agreements.</li>
+            </ul>
+            <p>You may request deletion of your data (see Section 7).</p>
+        </div>
+
+        <div class="section" id="security">
+            <h2>6. Security Measures</h2>
+            <p>We implement technical and organizational safeguards, including:</p>
+            <ul>
+                <li>Encryption (WhatsApp provides end-to-end encryption for messages).</li>
+                <li>Access controls to restrict internal data handling.</li>
+                <li>Regular security audits.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="your-rights">
+            <h2>7. Your Rights</h2>
+            <p>Depending on your jurisdiction, you may:</p>
+            <ul>
+                <li>Access, correct, or delete your personal data.</li>
+                <li>Opt out of non-transactional messages (reply "STOP").</li>
+                <li>Withdraw consent (contact us at <a href="mailto:echelonequipmentimports@gmail.com">echelonequipmentimports@gmail.com</a>/ <a href="+263777222217">+263777222217</a>).</li>
+            </ul>
+            <p>To exercise these rights, email Takudzwa Zvakasikwa at <a href="mailto:takudzwazvaks@gmail.com">takudzwazvaks@gmail.com</a>.</p>
+        </div>
+
+        <div class="section" id="updates">
+            <h2>8. Updates to This Policy</h2>
+            <p>We may update this Privacy Policy periodically. The latest version will be posted on <a href="https://eds-dfym.onrender.com/"> Our Website</a>.</p>
+        </div>
+
+        <div class="section" id="contact">
+            <h2>9. Contact Us</h2>
+            <div class="contact-info">
+                <p>For questions or complaints, contact:</p>
+                <p><strong>Echelon Digital Solutions</strong><br>
+                20 Peakwood Village, 41 Cecil Road, Greendale, Harare<br>
+                Email: <a href="mailto:echelonequipmentimports@gmail.com">echelonequipmentimports@gmail.com</a><br>
+                Phone: +263 777222217</p>
+                <p>For Meta/WhatsApp's data practices, review their <a href="https://www.facebook.com/privacy/policy/">Privacy Policy.</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Echelon Digital Solutions. All rights reserved.</p>
+        <p><strong>Key Compliance Notes:</strong></p>
+        <ul style="text-align: left; display: inline-block; margin: 0 auto;">
+            <li>Aligns with GDPR, CCPA, and WhatsApp Business API requirements.</li>
+            <li>Ensures opt-in/opt-out compliance per WhatsApp's Messaging Policy.</li>
+            <li>Excludes prohibited data (e.g., health/financial info) unless explicitly permitted.</li>
+        </ul>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDS LMS Management Portal</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/eds blue.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Main Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #f0f2f5, #e9f1fb);
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background-color: #003366;
+            color: #fff;
+            padding-top: 40px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+            transition: width 0.3s;
+            z-index: 1000;
+        }
+
+        .sidebar:hover {
+            width: 270px;
+        }
+
+        .sidebar h5 {
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar .btn {
+            color: #003366;
+            background-color: #fff;
+            width: 150px;
+            margin: 5px 0;
+            padding: 8px;
+            border: 3px solid #003366;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .sidebar .btn:hover {
+            background-color: #003366;
+            color: #fff;
+            border: 3px solid white;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary {
+            color: white;
+            background-color: #003366;
+            width: 15%;
+            margin: 8px 0;
+            padding: 5px;
+            border-radius: 8px;
+            border: 3px solid #003366;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background-color: white;
+            color: #003366;
+            border: 3px solid #003366;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            color: #003366;
+            background-color: white;
+            width: 15%;
+            margin: 8px 0;
+            padding: 5px;
+            border-radius: 8px;
+            border: 3px solid #003366;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e9f1fb;
+            color: #003366;
+            border: 3px solid #003366;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-danger {
+            color: white;
+            background-color: #003366;
+            width: 37%;
+            margin: 8px 0;
+            padding: 6px;
+            border-radius: 8px;
+            border: 3px solid #003366;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .btn-danger:hover {
+            background-color: white;
+            color: #003366;
+            border: 3px solid #003366;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            margin-left: 270px;
+            padding: 30px;
+            width: calc(100% - 270px);
+            background-color: #ffffff;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #e9f1fb;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .current-date {
+            color: #003366;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .admin-tag {
+            color: #003366;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* Tab Styling */
+        .nav-tabs .nav-link {
+            color: #003366;
+            font-weight: 600;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 8px 8px 0 0;
+            background: #e9f1fb;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #ffffff;
+            background-color: #003366;
+            font-weight: 800;
+        }
+
+        /* Card Styling */
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #ffffff;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-header {
+            background-color: #003366;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-center {
+            display: flex;
+            justify-content: center;
+            justify-content: space-between; 
+            gap: 10px;
+        }
+
+        .table-theme {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto;
+        }
+
+        .table-theme th {
+            background-color: #003366;
+            color: white;
+            text-align: center !important;
+            vertical-align: middle !important;
+            padding: 2px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .table-theme td {
+            font-weight: 500;
+            padding: 0px;
+            color: #003366;
+            text-align: center;
+            white-space: nowrap;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .container-scroll {
+            font-size: 13px;
+            margin-top: -2rem;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        /* Custom scrollbar styling */
+        .container-scroll::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .container-scroll::-webkit-scrollbar-thumb {
+            background-color: #003366;
+            border-radius: 5px;
+        }
+
+        .container-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: #e9f1fb;
+            box-shadow: inset 0 0 0 3px #003366;
+        }
+
+        .container-scroll::-webkit-scrollbar-track {
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary3{
+            color: white;
+            background-color: red;
+            width: 100%;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 1px;
+            padding-bottom: 1px;
+            border-radius: 8px;
+            border: 3px solid red;
+            font-size: 13px;
+            transition: background 0.3s;
+            text-align: center;
+            font-weight: 500;
+
+        }
+
+        .btn-primary3:hover{
+            background-color: white;
+            color: red;
+            border: 3px solid red;
+        }
+
+        /* Loading overlay */
+        .eds-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            font-family: 'Century Gothic', sans-serif;  
+        }
+        
+        .eds-logo {
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px #003366;
+        }
+        
+        .eds-tagline {
+            color: #fff;
+            font-size: 0.6rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        
+        .loader-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .loader-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, White, #003366);
+            animation: load 3s ease-in-out infinite;
+            border-radius: 2px;
+        }
+        
+        @keyframes load {
+            0% { width: 0%; left: 0; }
+            50% { width: 100%; left: 0; }
+            100% { width: 0%; left: 100%; }
+        }
+        
+        .eds-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 20px);
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .grid-item {
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 255, 252, 0.2);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        .grid-item:nth-child(1) { animation-delay: 0s; }
+        .grid-item:nth-child(2) { animation-delay: 0.2s; }
+        .grid-item:nth-child(3) { animation-delay: 0.4s; }
+        .grid-item:nth-child(4) { animation-delay: 0.6s; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.2); opacity: 1; background: #336699; }
+        }
+
+        /* Stats Cards */
+        .stats-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stats-card h3 {
+            color: #003366;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .stats-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #003366;
+        }
+
+        .stats-card .label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Company status indicators */
+        .status-active {
+            background-color: #e6f7e6;
+            color: #2e7d32;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .status-inactive {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        /* Action buttons */
+        .action-btn {
+            padding: 5px 10px;
+            margin: 2px;
+            font-size: 0.8rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-view {
+            background-color: #003366;
+            color: white;
+        }
+
+        .btn-edit {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-suspend {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 200px;
+            }
+            .main-content {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+                position: fixed;
+                z-index: 1000;
+            }
+            .sidebar.active {
+                width: 250px;
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            .sidebar-toggle {
+                display: block !important;
+            }
+        }
+
+        /* Sidebar toggle for mobile */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1100;
+            background: #003366;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Overlay -->
+    <div class="eds-loader" id="edsLoader" style="display: none;">
+        <div class="eds-logo"><img src="{{ url_for('static', filename='images/EDS LOGO.png') }}" alt="Logo" style="width: 200px;"></div>
+        <br><br>
+        <p style="font-weight: 700;color: white;font-size: 1.2rem;">Processing Your Request, Please Wait...</p>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+        <div class="eds-grid">
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+        </div>
+    </div>
+    
+    <!-- Sidebar Toggle for Mobile -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <img src="{{ url_for('static', filename='images/EDS LOGO.png') }}" alt="EDS Logo">
+        <h5>LMS Management Portal</h5>
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#dashboardModal">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </button>
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#companiesModal">
+            <i class="bi bi-building"></i> Manage Companies
+        </button>
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#usersModal">
+            <i class="bi bi-people-fill"></i> System Users
+        </button>
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#settingsModal">
+            <i class="bi bi-gear-fill"></i> System Settings
+        </button>
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#reportsModal">
+            <i class="bi bi-file-earmark-bar-graph"></i> Reports
+        </button>
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#backupModal">
+            <i class="bi bi-database"></i> Backup/Restore
+        </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <header>
+            <div class="admin-tag">EDS LMS Management Portal <span style="color: white;background-color: #003366;border-radius: 10px;padding: 6px;font-size: 13px;">Super Admin</span></div>
+            <div><span class="current-date" id="currdate">DATE: {{ today_date }}</span></div>
+            
+            <div class="profile-dropdown">
+                <button onclick="window.location.href='/logout'" class="btn btn-primary" style="width: max-content;">
+                    Logout <i class="bi bi-door-closed-fill" style="margin-left: 7px;"></i>
+                </button>
+            </div>
+        </header>
+        
+    <div id="status"></div>
+        <!-- Dashboard Overview -->
+        <div class="card">
+            <h2 style="color: #003366;"><i class="bi bi-speedometer2"></i>SYSTEM OVERVIEW</h2>
+            <hr>
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <h3>Total Companies</h3>
+                        <div class="value">148</div>
+                        <div class="label">Registered in system</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <h3>Active Users</h3>
+                        <div class="value">3,742</div>
+                        <div class="label">Currently using LMS</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <h3>Leave Apps</h3>
+                        <div class="value">1,284</div>
+                        <div class="label">This month</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <h3>System Health</h3>
+                        <div class="value">100%</div>
+                        <div class="label">All systems operational</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-8">
+                    <div class="card">
+                        <h4><i class="bi bi-bar-chart-line"></i> PORTFOLIO</h4>
+                        <h2>Export All Tables from Database</h2>
+
+                        <button id="exportBtn">Export to Excel</button>
+
+                    <div class="container mt-5">
+                        <div class="container2" style="overflow-y: auto;">
+                            {{ table_companies_html |safe }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h4><i class="bi bi-pie-chart"></i> Company Distribution</h4>
+                        <canvas id="companyChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Activity Section -->
+        <div class="card mt-4">
+            <h3><i class="bi bi-clock-history"></i> Recent System Activity</h3>
+            <hr>
+            <div class="container-scroll">
+                <table class="table table-theme" id="activityTable">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Activity</th>
+                            <th>User</th>
+                            <th>Company</th>
+                            <th>IP Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2023-11-15 14:32:45</td>
+                            <td>New company registered</td>
+                            <td>admin@eds.com</td>
+                            <td>EDS Holdings</td>
+                            <td>192.168.1.1</td>
+                        </tr>
+                        <tr>
+                            <td>2023-11-15 14:30:12</td>
+                            <td>User login</td>
+                            <td>johndoe@acme.com</td>
+                            <td>ACME Corp</td>
+                            <td>41.215.184.12</td>
+                        </tr>
+                        <tr>
+                            <td>2023-11-15 14:28:33</td>
+                            <td>Leave application approved</td>
+                            <td>manager@xyz.com</td>
+                            <td>XYZ Enterprises</td>
+                            <td>105.178.93.45</td>
+                        </tr>
+                        <tr>
+                            <td>2023-11-15 14:25:47</td>
+                            <td>System backup completed</td>
+                            <td>admin@eds.com</td>
+                            <td>EDS Holdings</td>
+                            <td>192.168.1.1</td>
+                        </tr>
+                        <tr>
+                            <td>2023-11-15 14:22:19</td>
+                            <td>New user created</td>
+                            <td>hr@global.com</td>
+                            <td>Global Solutions</td>
+                            <td>154.120.78.231</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals for Management Portal -->
+    
+    <!-- Companies Management Modal -->
+    <div class="modal fade" id="companiesModal" tabindex="-1" aria-labelledby="companiesModalLabel">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-building"></i> Company Management</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCompanyModal">
+                            <i class="bi bi-plus-circle"></i> Add New Company
+                        </button>
+                        <div class="input-group" style="width: 300px;">
+                            <input type="text" class="form-control" placeholder="Search companies...">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="container-scroll">
+                        <table class="table table-theme" id="companiesTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Company Name</th>
+                                    <th>Admin Email</th>
+                                    <th>Users</th>
+                                    <th>Status</th>
+                                    <th>Registration Date</th>
+                                    <th>Subscription</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1001</td>
+                                    <td>ACME Corporation</td>
+                                    <td>admin@acme.com</td>
+                                    <td>143</td>
+                                    <td><span class="status-active">Active</span></td>
+                                    <td>2023-01-15</td>
+                                    <td>Premium</td>
+                                    <td>
+                                        <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+                                        <button class="action-btn btn-suspend"><i class="bi bi-pause"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1002</td>
+                                    <td>XYZ Enterprises</td>
+                                    <td>hr@xyz.com</td>
+                                    <td>87</td>
+                                    <td><span class="status-active">Active</span></td>
+                                    <td>2023-03-22</td>
+                                    <td>Standard</td>
+                                    <td>
+                                        <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+                                        <button class="action-btn btn-suspend"><i class="bi bi-pause"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1003</td>
+                                    <td>Global Solutions</td>
+                                    <td>admin@global.com</td>
+                                    <td>256</td>
+                                    <td><span class="status-inactive">Suspended</span></td>
+                                    <td>2022-11-05</td>
+                                    <td>Enterprise</td>
+                                    <td>
+                                        <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+                                        <button class="action-btn btn-suspend"><i class="bi bi-play"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Company Modal -->
+    <div class="modal fade" id="addCompanyModal" tabindex="-1" aria-labelledby="addCompanyModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-plus-circle"></i> Add New Company</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="companyForm">
+                        <div class="form-group">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" class="form-control" id="companyName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="companyEmail">Admin Email</label>
+                            <input type="email" class="form-control" id="companyEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="companyPlan">Subscription Plan</label>
+                            <select class="form-control" id="companyPlan" required>
+                                <option value="">Select Plan</option>
+                                <option value="basic">Basic</option>
+                                <option value="standard">Standard</option>
+                                <option value="premium">Premium</option>
+                                <option value="enterprise">Enterprise</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="companyUsers">Initial Users</label>
+                            <input type="number" class="form-control" id="companyUsers" min="1" value="1">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveCompany">Save Company</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Users Modal -->
+    <div class="modal fade" id="usersModal" tabindex="-1" aria-labelledby="usersModalLabel">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-people-fill"></i> System Users</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                                <i class="bi bi-person-plus"></i> Add User
+                            </button>
+                            <button class="btn btn-secondary">
+                                <i class="bi bi-file-earmark-excel"></i> Export
+                            </button>
+                        </div>
+                        <div class="input-group" style="width: 300px;">
+                            <input type="text" class="form-control" placeholder="Search users...">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="container-scroll">
+                        <table class="table table-theme" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Company</th>
+                                    <th>Role</th>
+                                    <th>Last Login</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>5001</td>
+                                    <td>John Doe</td>
+                                    <td>john@acme.com</td>
+                                    <td>ACME Corporation</td>
+                                    <td>Administrator</td>
+                                    <td>2023-11-15 09:32</td>
+                                    <td><span class="status-active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+                                        <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5002</td>
+                                    <td>Jane Smith</td>
+                                    <td>jane@xyz.com</td>
+                                    <td>XYZ Enterprises</td>
+                                    <td>HR Manager</td>
+                                    <td>2023-11-14 14:15</td>
+                                    <td><span class="status-active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+                                        <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5003</td>
+                                    <td>Mike Johnson</td>
+                                    <td>mike@global.com</td>
+                                    <td>Global Solutions</td>
+                                    <td>Employee</td>
+                                    <td>2023-11-10 11:45</td>
+                                    <td><span class="status-inactive">Inactive</span></td>
+                                    <td>
+                                        <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+                                        <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-gear-fill"></i> System Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="settingsTabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#generalSettings">General</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#emailSettings">Email</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#securitySettings">Security</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#maintenanceSettings">Maintenance</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content mt-3">
+                        <div class="tab-pane fade show active" id="generalSettings">
+                            <form>
+                                <div class="form-group">
+                                    <label>System Name</label>
+                                    <input type="text" class="form-control" value="EDS Leave Management System">
+                                </div>
+                                <div class="form-group">
+                                    <label>Default Timezone</label>
+                                    <select class="form-control">
+                                        <option>UTC</option>
+                                        <option selected>Africa/Harare</option>
+                                        <option>Africa/Johannesburg</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date Format</label>
+                                    <select class="form-control">
+                                        <option>YYYY-MM-DD</option>
+                                        <option selected>DD/MM/YYYY</option>
+                                        <option>MM/DD/YYYY</option>
+                                    </select>
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="enableNotifications" checked>
+                                    <label class="form-check-label" for="enableNotifications">Enable Email Notifications</label>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="emailSettings">
+                            <form>
+                                <div class="form-group">
+                                    <label>SMTP Host</label>
+                                    <input type="text" class="form-control" value="smtp.eds.co.zw">
+                                </div>
+                                <div class="form-group">
+                                    <label>SMTP Port</label>
+                                    <input type="number" class="form-control" value="587">
+                                </div>
+                                <div class="form-group">
+                                    <label>SMTP Username</label>
+                                    <input type="text" class="form-control" value="noreply@eds.co.zw">
+                                </div>
+                                <div class="form-group">
+                                    <label>SMTP Password</label>
+                                    <input type="password" class="form-control" value="********">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function deleteCompany(companyName) {
+            if (!confirm(`Are you sure you want to delete all tables related to "${companyName}"?`)) return;
+
+            fetch('/delete_company_tables', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ company_name: companyName })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+            });
+        }
+
+        function somCompany(companyName) {
+            if (!confirm(`Are you sure you want to run SOM on Main table related to "${companyName}"?`)) return;
+
+            fetch('/run_som_company_tables', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ company_name: companyName })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+            });
+        }
+
+
+    </script>
+
+
+    <script>
+        document.getElementById('exportBtn').addEventListener('click', function () {
+            // Create a temporary link to download the file
+            const link = document.createElement('a');
+            link.href = '/export_all_tables';
+            link.download = 'all_tables.xlsx';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+
+</body>
+</html>
