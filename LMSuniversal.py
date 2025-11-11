@@ -18,7 +18,6 @@ import openpyxl
 from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.styles import PatternFill, Font
 from werkzeug.utils import secure_filename
-import matplotlib.pyplot as plt
 import io
 import base64
 import json
