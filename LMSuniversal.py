@@ -25,7 +25,6 @@ import io
 import base64
 import json
 import requests
-import pdfkit
 from weasyprint import HTML
 import re
 from paynow import Paynow
@@ -169,8 +168,9 @@ def initialize_database_tables():
     except Exception as e:
         print(f"❌ Error initializing database tables: {e}")
 
-# Initialize tables on startup
-initialize_database_tables()
+# Initialize tables on startup - COMMENTED OUT to prevent blocking Render startup
+# Tables will be created on first request if they don't exist
+# initialize_database_tables()
 
 ##################### client test ####################################################################################################
 
