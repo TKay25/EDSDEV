@@ -9,7 +9,6 @@ import pandas as pd
 from xhtml2pdf import pisa
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import matplotlib.pyplot as plt
 import seaborn as sns
 import psycopg2
 from psycopg2 import sql
@@ -11308,6 +11307,8 @@ def webhook():
 
                                                     elif button_id == "Summarycomp":
 
+                                                        import matplotlib.pyplot as plt
+
                                                         try:
 
                                                             table_name = f"{company_reg}main"
@@ -11392,6 +11393,7 @@ def webhook():
 
 
                                                             def generate_graph_image_bytes(result_dict):
+
                                                                 plt.figure(figsize=(12, 6))
 
                                                                 for dept, values in result_dict.items():
@@ -11412,6 +11414,7 @@ def webhook():
                                                                 return img_buffer
 
                                                             def generate_graph_image_bytes_bar(result_dict):
+
                                                                 plt.figure(figsize=(12, 6))
 
                                                                 # Extract all unique dates
@@ -12585,6 +12588,8 @@ def webhook():
 
                                                 elif button_id == "Summarycomp":
 
+                                                    import matplotlib.pyplot as plt
+
                                                     try:
 
                                                         table_name = f"{company_reg}main"
@@ -12669,6 +12674,8 @@ def webhook():
 
 
                                                         def generate_graph_image_bytes(result_dict):
+
+
                                                             plt.figure(figsize=(12, 6))
 
                                                             for dept, values in result_dict.items():
