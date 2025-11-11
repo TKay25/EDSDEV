@@ -304,7 +304,7 @@ def webhook():
                                         print(f"📱 Conversation {conversation_id}: Sender's WhatsApp number: {sender_number}")
                                         session['client'] = str(sender_number)
 
-                                        external_database_url = "postgresql://lmsdatabase_8ag3_user:6WD9lOnHkiU7utlUUjT88m4XgEYQMTLb@dpg-ctp9h0aj1k6c739h9di0-a.oregon-postgres.render.com/lmsdatabase_8ag3"
+                                        #external_database_url = "postgresql://lmsdatabase_8ag3_user:6WD9lOnHkiU7utlUUjT88m4XgEYQMTLb@dpg-ctp9h0aj1k6c739h9di0-a.oregon-postgres.render.com/lmsdatabase_8ag3"
 
                                         try:
                                             with get_db() as (cursor, connection):
@@ -6452,7 +6452,7 @@ def webhook():
                                 print(f"📱 Conversation {conversation_id}: Sender's WhatsApp number: {sender_number}")
                                 session['client'] = str(sender_number)
 
-                                external_database_url = "postgresql://lmsdatabase_8ag3_user:6WD9lOnHkiU7utlUUjT88m4XgEYQMTLb@dpg-ctp9h0aj1k6c739h9di0-a.oregon-postgres.render.com/lmsdatabase_8ag3"
+                                #external_database_url = "postgresql://lmsdatabase_8ag3_user:6WD9lOnHkiU7utlUUjT88m4XgEYQMTLb@dpg-ctp9h0aj1k6c739h9di0-a.oregon-postgres.render.com/lmsdatabase_8ag3"
 
                                 try:
                                     with get_db() as (cursor, connection):
